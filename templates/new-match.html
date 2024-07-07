@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Tennis Table</title>
+    <link href="https://fonts.cdnfonts.com/css/score-board" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Tennis Table Project</h1>
+    </header>
+    <main>
+        <div class="start-game-menu-wrapper flex">
+            <form method="post" name="player-names" class="flex" action="/new-match">
+                <div class="form-group flex">
+                    <div>
+                        <label for="name-p1">First Player</label>
+                        <input required minlength="2" type="text" name="name-p1" id="name-p1" placeholder="Enter a name...">
+                    </div>
+                    <div>
+                        <label for="name-p2">Second Player</label>
+                        <input required minlength="2" type="text" name="name-p2" id="name-p2" placeholder="Enter a name...">
+                    </div>
+                </div>
+                <button type="action">Start the match</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h1>Footer</h1>
+    </footer>
+</body>
+

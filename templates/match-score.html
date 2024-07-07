@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Tennis Table</title>
+    <link href="https://fonts.cdnfonts.com/css/score-board" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Tennis Table Project</h1>
+        <button>Menu</button>
+    </header>
+    <aside>
+        <div class="set-history">
+            <h2>SET HISTORY</h2>
+            <div class="set-info flex" id="first-set">
+                <span class="set-digit table-el" id="s1-d1">{{s1_d1}}</span>
+                <span class="set-digit table-el" id="s1-d2">{{s1_d2}}</span>
+            </div>
+            <div class="set-info flex" id="second-set">
+                <span class="set-digit table-el" id="s2-d1">{{s2_d1}}</span>
+                <span class="set-digit table-el" id="s2-d2">{{s2_d2}}</span>
+            </div>
+            <div class="set-info flex" id="second-set">
+                <span class="set-digit table-el" id="s3-d1">{{s3_d1}}</span>
+                <span class="set-digit table-el" id="s3-d2">{{s3_d2}}</span>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <div class="table-wrapper">
+            <div class="table-box">
+                <div class="player-names flex">
+                    <span class="table-el p-name table-text" id="name-p1">{{name_p1}}</span>
+                    <span class="table-el p-name table-text" id="name-p2">{{name_p2}}</span>
+                </div>
+                
+                 <div class="score-points flex">
+                    <div class="flex digits" id="points-p1">
+                        <span class="table-el score-digit table-text" id="p1-digit-1">{{p1_digit_1}}</span>
+                        <span class="table-el score-digit table-text" id="p1-digit-2">{{p1_digit_2}}</span>
+                    </div>
+
+                    <div class="flex table-colon">
+                        <span class="dot"></span> 
+                        <span class="dot"></span>
+                    </div>
+
+                    <div class="flex digits" id="points-p2">
+                        <span class="table-el score-digit table-text" id="p2-digit-1">{{p2_digit_1}}</span>
+                        <span class="table-el score-digit table-text" id="p2-digit-2">{{p2_digit_2}}</span>
+                    </div>
+                </div>
+                
+                <div class="score-sets flex">
+                    <span class="table-el p-sets table-text" id="sets-p1">{{sets_p1}}</span>
+                    <span class="table-text">SET</span>
+                    <span class="table-el p-sets table-text" id="sets-p2">{{sets_p2}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="add-point-btns-wrapper">
+            <button>Add point</button>
+            <button>Add point</button>
+
+        </div>
+    </main>
+    <footer>
+        <h1>Footer</h1>
+    </footer>
+
+</body>
+</html>
