@@ -2,12 +2,13 @@ from urllib.parse import parse_qs
 
 from ..base import BaseHandler
 
-class BaseController(BaseHandler):
+class BaseController(BaseHandler):    
     def __init__(self) -> None:
         super().__init__()
         self.response_headers = [
             ('Content-type', 'text/html')
             ]
+
         
     def __call__(self, environ, start_response):
         method = environ.get('REQUEST_METHOD', None)

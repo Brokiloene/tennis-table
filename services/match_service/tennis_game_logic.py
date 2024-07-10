@@ -1,6 +1,6 @@
-from enum import IntEnum
+import itertools
 
-from utils.uuid import get_uuid
+from enum import IntEnum
 
 class GameScore(IntEnum):
     LOVE = 0
@@ -10,12 +10,34 @@ class GameScore(IntEnum):
     GAME_OR_AD = 4
     AD_WIN = 5
 
+def game_score_to_str(game_score: GameScore|int):
+    if not isinstance(game_score, GameScore):
+        print(game_score)
+        print(type(game_score))
+        res = str(game_score)
+        if len(res) < 2:
+            res = "0" + res
+        return res
+    else:
+        match game_score:
+            case GameScore.LOVE:
+                return "00"
+            case GameScore.FIFTEEN:
+                return "15"
+            case GameScore.THIRTY:
+                return "30"
+            case GameScore.FOURTY:
+                return "40"
+            case GameScore.GAME_OR_AD:
+                return "AD"
+            case _: # error
+                return "ER"
+
 
 class Match:
-    def __init__(self, p1_id: int, p2_id: int) -> None:
-        self.match_uuid = get_uuid()
-        self.p1_id = p1_id
-        self.p2_id = p2_id
+    def __init__(self, p1_name: str, p2_name: str) -> None:
+        self.p1_name = p1_name
+        self.p2_name = p2_name
         self.sets = [
             [0,0],
             [0,0],
@@ -24,13 +46,21 @@ class Match:
         self.cur_set = 0
         self.p1_game_score: GameScore|int = GameScore.LOVE
         self.p2_game_score: GameScore|int = GameScore.LOVE
+        self.p1_sets_won = 0
+        self.p2_sets_won = 0
+
         self.is_tiebreak = False
-        self.is_match_end = False
-        self.winner_id: int|None = None 
+        self.match_ended = False
+        self.winner: str|None = None 
 
     def add_game_point(self, player_num: int) -> None:
-        cur_score = getattr(self, f"p{player_num}_score")
-        setattr(self, f"p{player_num}_score", cur_score + 1)
+        cur_score = getattr(self, f"p{player_num}_game_score")
+        if self.is_tiebreak:
+            new_score = cur_score + 1
+        else:
+            new_score = GameScore(cur_score + 1)
+        print(new_score)
+        setattr(self, f"p{player_num}_game_score", new_score)
         if (
             self.p1_game_score == GameScore.GAME_OR_AD and
             self.p2_game_score == GameScore.GAME_OR_AD
@@ -45,8 +75,10 @@ class Match:
 
         if self.is_set_end():
             self.cur_set += 1
-            if self.cur_set == 3:
-                self.is_match_end = True
+            cur_sets_won = getattr(self, f"p{player_num}_sets_won")
+            setattr(self, f"p{player_num}_sets_won", cur_sets_won + 1)
+            if self.is_match_end():
+                self.match_ended = True
                 self.set_winner()
         
     def is_game_end(self) -> bool:
@@ -94,18 +126,36 @@ class Match:
             self.is_tiebreak = True
         
         return False
+    
+    def is_match_end(self) -> bool:
+        if self.p1_sets_won > 2 or self.p2_sets_won > 2:
+            return True
+        else:
+            return False
 
     def set_winner(self) -> None:
-        p1_sets_won = 0
-        p2_sets_won = 0
-        for set_result in self.sets:
-            if set_result[0] > set_result[1]:
-                p1_sets_won += 1
-            else:
-                p2_sets_won += 1
-        
-        if p1_sets_won > p2_sets_won:
-            self.winner_id = self.p1_id
+        if self.p1_sets_won > self.p2_sets_won:
+            self.winner = self.p1_name
         else:
-            self.winner_id = self.p2_id
+            self.winner = self.p2_name
+
+    def serialize(self) -> dict:
+        p1_game_score: str = game_score_to_str(self.p1_game_score)
+        p2_game_score: str = game_score_to_str(self.p2_game_score)
+        cur_set_score: list = self.sets[self.cur_set]
+
+        d = {
+            "name_p1": self.p1_name,
+            "name_p2": self.p2_name,
+            "p1_digit_1": p1_game_score[0],
+            "p1_digit_2": p1_game_score[1],
+            "p2_digit_1": p2_game_score[0],
+            "p2_digit_2": p2_game_score[1],
+            "cur_set_p1": cur_set_score[0],
+            "cur_set_p2": cur_set_score[1],
+        }
+        keys = ["set1_p1", "set1_p2", "set2_p1", "set2_p2", "set3_p1", "set3_p2"]
+        vals = itertools.chain(*self.sets)
+        d |= {k:v for k, v in zip(keys, vals)}
+        return d
 

@@ -21,14 +21,14 @@ class RendererHTML:
         "p1_digit_2": "0",
         "p2_digit_1": "0",
         "p2_digit_2": "0",
-        "sets_p1": "0",
-        "sets_p2": "0",
-        "s1_d1": "0",
-        "s1_d2": "0",
-        "s2_d1": "0",
-        "s2_d2": "0",
-        "s3_d1": "0",
-        "s3_d2": "0"
+        "cur_set_p1": "0",
+        "cur_set_p2": "0",
+        "set1_p1": "0",
+        "set1_p2": "0",
+        "set2_p1": "0",
+        "set2_p2": "0",
+        "set3_p1": "0",
+        "set3_p2": "0"
     }
 
     @classmethod

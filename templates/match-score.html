@@ -18,16 +18,16 @@
         <div class="set-history">
             <h2>SET HISTORY</h2>
             <div class="set-info flex" id="first-set">
-                <span class="set-digit table-el" id="s1-d1">{{s1_d1}}</span>
-                <span class="set-digit table-el" id="s1-d2">{{s1_d2}}</span>
+                <span class="set-digit table-el" id="s1-d1">{{set1_p1}}</span>
+                <span class="set-digit table-el" id="s1-d2">{{set1_p2}}</span>
             </div>
             <div class="set-info flex" id="second-set">
-                <span class="set-digit table-el" id="s2-d1">{{s2_d1}}</span>
-                <span class="set-digit table-el" id="s2-d2">{{s2_d2}}</span>
+                <span class="set-digit table-el" id="s2-d1">{{set2_p1}}</span>
+                <span class="set-digit table-el" id="s2-d2">{{set2_p2}}</span>
             </div>
             <div class="set-info flex" id="second-set">
-                <span class="set-digit table-el" id="s3-d1">{{s3_d1}}</span>
-                <span class="set-digit table-el" id="s3-d2">{{s3_d2}}</span>
+                <span class="set-digit table-el" id="s3-d1">{{set3_p1}}</span>
+                <span class="set-digit table-el" id="s3-d2">{{set3_p2}}</span>
             </div>
         </div>
     </aside>
@@ -57,17 +57,19 @@
                 </div>
                 
                 <div class="score-sets flex">
-                    <span class="table-el p-sets table-text" id="sets-p1">{{sets_p1}}</span>
+                    <span class="table-el p-sets table-text" id="sets-p1">{{cur_set_p1}}</span>
                     <span class="table-text">SET</span>
-                    <span class="table-el p-sets table-text" id="sets-p2">{{sets_p2}}</span>
+                    <span class="table-el p-sets table-text" id="sets-p2">{{cur_set_p2}}</span>
                 </div>
             </div>
         </div>
-        <div class="add-point-btns-wrapper">
-            <button>Add point</button>
-            <button>Add point</button>
+        <form class="change-score-form" method="post" name="change-score">
+            <div class="add-point-btns-wrapper">
+                <button type="submit" name="p1-scores" value="p1-scores">Add point</button>
+                <button type="submit" name="p2-scores" value="p2-scores">Add point</button>
+            </div>
+        </form>
 
-        </div>
     </main>
     <footer>
         <h1>Footer</h1>
