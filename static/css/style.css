@@ -33,11 +33,11 @@ aside {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-
-    position: absolute;
+    flex-wrap: wrap;
 
     width: 25%;
-    height: 80%;
+    /* height: 80%; */
+    height: 100%;
 }
 
 h1 {
@@ -87,9 +87,9 @@ header button {
 
 .table-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+    /* flex-direction: column; */
 
     width: 100%;
     height: 80%;
@@ -224,9 +224,13 @@ header button {
 
 /* Set History Table */
 
-.set-history {
+.side-table-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
     width: 80%;
-    height: 82.5%;
+    height: 100%;
     box-sizing: border-box;
     margin-left: 2.5%;
     padding: 0;
@@ -237,11 +241,11 @@ header button {
     box-shadow: 1rem 1rem grey;
 }
 
-.set-history h2 {
+.side-table-box h2 {
     display: block;
 
-    height: 12.5%;
-    padding: 5%;
+    height: 5%;
+    padding-top: 5%;
     margin: 0;
     box-sizing: border-box;
     
@@ -249,6 +253,23 @@ header button {
     font-family: 'Helvetica', sans-serif;
     color: rgb(218,223,0);
     text-align: center;
+}
+
+.side-table-box span {
+    padding: 0% 5% 0% 5%;
+}
+
+.side-table-box .match-status {
+    width: 80%;
+}
+
+.side-table-box form {
+    width: 80%;
+    height: 20%;
+}
+
+.side-table-box form button {
+    height: 100%;
 }
 
 .set-info {

@@ -12,27 +12,28 @@
 <body>
     <header>
         <h1>Tennis Table Project</h1>
-        <button>Menu</button>
+        <!-- <button>Menu</button> -->
     </header>
-    <aside>
-        <div class="set-history">
-            <h2>SET HISTORY</h2>
-            <div class="set-info flex" id="first-set">
-                <span class="set-digit table-el" id="s1-d1">{{set1_p1}}</span>
-                <span class="set-digit table-el" id="s1-d2">{{set1_p2}}</span>
-            </div>
-            <div class="set-info flex" id="second-set">
-                <span class="set-digit table-el" id="s2-d1">{{set2_p1}}</span>
-                <span class="set-digit table-el" id="s2-d2">{{set2_p2}}</span>
-            </div>
-            <div class="set-info flex" id="second-set">
-                <span class="set-digit table-el" id="s3-d1">{{set3_p1}}</span>
-                <span class="set-digit table-el" id="s3-d2">{{set3_p2}}</span>
-            </div>
-        </div>
-    </aside>
     <main>
         <div class="table-wrapper">
+            <aside>
+                <div class="side-table-box">
+                    <h2>SET HISTORY</h2>
+                    <div class="set-info flex" id="first-set">
+                        <span class="set-digit table-el" id="s1-d1">{{set1_p1}}</span>
+                        <span class="set-digit table-el" id="s1-d2">{{set1_p2}}</span>
+                    </div>
+                    <div class="set-info flex" id="second-set">
+                        <span class="set-digit table-el" id="s2-d1">{{set2_p1}}</span>
+                        <span class="set-digit table-el" id="s2-d2">{{set2_p2}}</span>
+                    </div>
+                    <div class="set-info flex" id="second-set">
+                        <span class="set-digit table-el" id="s3-d1">{{set3_p1}}</span>
+                        <span class="set-digit table-el" id="s3-d2">{{set3_p2}}</span>
+                    </div>
+                </div>
+            </aside>
+
             <div class="table-box">
                 <div class="player-names flex">
                     <span class="table-el p-name table-text" id="name-p1">{{name_p1}}</span>
@@ -62,6 +63,22 @@
                     <span class="table-el p-sets table-text" id="sets-p2">{{cur_set_p2}}</span>
                 </div>
             </div>
+            <aside>
+                <div class="side-table-box">
+                    <h2>MATCH STATUS</h2>
+                    <span class="table-el table-text match-status">{{match_status}}</span>
+                    <form action="">
+                        <button>MAIN MENU</button>
+                    </form>
+                    <form action="">
+                        <button>NEW MATCH</button>
+                    </form>
+                    <form action="">
+                        <button>MATCH HISTORY</button>
+                    </form>
+                    
+                </div>
+            </aside> 
         </div>
         <form class="change-score-form" method="post" name="change-score">
             <div class="add-point-btns-wrapper">

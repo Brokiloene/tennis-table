@@ -157,6 +157,14 @@ class Match:
             "cur_set_p1": cur_set_score[0],
             "cur_set_p2": cur_set_score[1],
         }
+
+        if self.is_tiebreak:
+            d["match_status"] = "tiebreak"
+        elif self.match_ended:
+            d["match_status"] = "match is over"
+        else:
+            d["match_status"] = "match is ongoing"
+
         keys = ["set1_p1", "set1_p2", "set2_p1", "set2_p2", "set3_p1", "set3_p2"]
         vals = itertools.chain(*self.sets)
         d |= {k:v for k, v in zip(keys, vals)}
