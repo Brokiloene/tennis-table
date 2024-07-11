@@ -9,6 +9,5 @@ class MatchService:
         return match_uuid
     
     def match_add_point(match: Match, player: int) -> None:
-        if not match.match_ended:
-            match.add_game_point(player)
+        match.add_game_point(player)
 

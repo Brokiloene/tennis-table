@@ -12,8 +12,6 @@ class GameScore(IntEnum):
 
 def game_score_to_str(game_score: GameScore|int):
     if not isinstance(game_score, GameScore):
-        print(game_score)
-        print(type(game_score))
         res = str(game_score)
         if len(res) < 2:
             res = "0" + res
@@ -55,12 +53,14 @@ class Match:
 
     def add_game_point(self, player_num: int) -> None:
         # there are player 1 and player 2
+
+        if self.match_ended:
+            return
         cur_score = getattr(self, f"p{player_num}_game_score")
         if self.is_tiebreak:
             new_score = cur_score + 1
         else:
             new_score = GameScore(cur_score + 1)
-        print(new_score)
         setattr(self, f"p{player_num}_game_score", new_score)
         if (
             isinstance(self.p1_game_score, GameScore) and
