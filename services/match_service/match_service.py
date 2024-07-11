@@ -7,3 +7,8 @@ class MatchService:
         match_uuid = get_uuid()
         MatchService.ongoing_matches[match_uuid] = Match(p1_name, p2_name)
         return match_uuid
+    
+    def match_add_point(match: Match, player: int) -> None:
+        if not match.match_ended:
+            match.add_game_point(player)
+

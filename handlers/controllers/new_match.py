@@ -15,13 +15,13 @@ class NewMatchController(BaseController):
     def do_POST(self, environ, start_response):
         try:
             form_data = self.parse_post_form(environ)
-        except (ValueError):
+        except ValueError:
             return self.send_error(environ, start_response, "411 Length Required")
-
-        print(form_data)
-        player1_name: str = form_data['name-p1'][0]
-        player2_name: str = form_data['name-p2'][0]
-        print(player1_name, player2_name)
+        try:
+            player1_name: str = form_data['name-p1'][0]
+            player2_name: str = form_data['name-p2'][0]
+        except KeyError:
+            return self.send_error(environ, start_response, "400 Bad Request")
         match_uuid = MatchService.create_match(player1_name, player2_name)
 
         status = '303 See other'

@@ -13,9 +13,9 @@ class MatchScoreController(BaseController):
 
         form_data = self.parse_post_form(environ)
         if "p1-scores" in form_data:
-            match.add_game_point(1)
+            MatchService.match_add_point(match, 1)
         elif "p2-scores" in form_data:
-            match.add_game_point(2)
+            MatchService.match_add_point(match, 2)
         else:
             return self.send_error(environ, start_response, '400 Bad Request')
 

@@ -54,6 +54,7 @@ class Match:
         self.winner: str|None = None 
 
     def add_game_point(self, player_num: int) -> None:
+        # there are player 1 and player 2
         cur_score = getattr(self, f"p{player_num}_game_score")
         if self.is_tiebreak:
             new_score = cur_score + 1
@@ -62,6 +63,8 @@ class Match:
         print(new_score)
         setattr(self, f"p{player_num}_game_score", new_score)
         if (
+            isinstance(self.p1_game_score, GameScore) and
+            isinstance(self.p2_game_score, GameScore) and
             self.p1_game_score == GameScore.GAME_OR_AD and
             self.p2_game_score == GameScore.GAME_OR_AD
         ):
@@ -128,7 +131,7 @@ class Match:
         return False
     
     def is_match_end(self) -> bool:
-        if self.p1_sets_won > 2 or self.p2_sets_won > 2:
+        if self.p1_sets_won >= 2 or self.p2_sets_won >= 2:
             return True
         else:
             return False
