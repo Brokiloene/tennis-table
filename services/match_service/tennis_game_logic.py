@@ -145,7 +145,10 @@ class Match:
     def serialize(self) -> dict:
         p1_game_score: str = game_score_to_str(self.p1_game_score)
         p2_game_score: str = game_score_to_str(self.p2_game_score)
-        cur_set_score: list = self.sets[self.cur_set]
+        if self.match_ended:
+            cur_set_score: list = self.sets[2]
+        else:
+            cur_set_score: list = self.sets[self.cur_set]
 
         d = {
             "name_p1": self.p1_name,

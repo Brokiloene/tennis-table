@@ -232,7 +232,6 @@ header button {
     width: 80%;
     height: 100%;
     box-sizing: border-box;
-    margin-left: 2.5%;
     padding: 0;
 
     background-color: rgb(20,174,103);
@@ -261,6 +260,7 @@ header button {
 
 .side-table-box .match-status {
     width: 80%;
+    height: 12.5%;
 }
 
 .side-table-box form {
