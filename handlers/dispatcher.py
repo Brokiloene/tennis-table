@@ -3,7 +3,7 @@ from typing import Any
 
 from handlers.controllers import (
     IndexController, 
-    MatchHistoryController, 
+    MatchesHistoryController, 
     NewMatchController, 
     MatchScoreController)
 
@@ -14,7 +14,7 @@ class Dispatcher(BaseHandler):
             "/": IndexController,
             "/new-match": NewMatchController,
             "/match-score": MatchScoreController,
-            "/matches": MatchHistoryController
+            "/matches": MatchesHistoryController
         }
 
     def __call__(self, environ, start_response) -> Any:

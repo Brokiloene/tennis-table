@@ -1,0 +1,16 @@
+@import url("base.css");
+
+.main-menu-wrapper {
+    justify-content: space-around;
+}
+
+.main-menu-wrapper form {
+    align-items: center;
+    width: 25%;
+}
+
+form button {
+    height: 30%;
+    width: 100%;
+    font-size: 2rem;
+}

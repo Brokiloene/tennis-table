@@ -1,33 +1,4 @@
-/* Global Layout */
-html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    height: 100%;
-    background-color: rgb(223, 211, 211);
-}
-
-main {
-    width: 100%;
-    height: 80%;
-}
-
-header, footer {
-    width: 100%;
-    height: 9%;
-
-    text-align: center;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-
-    text-align: start;
-    font-style: italic;
-}
+@import url("base.css");
 
 aside {
     display: flex;
@@ -36,67 +7,21 @@ aside {
     flex-wrap: wrap;
 
     width: 25%;
-    /* height: 80%; */
     height: 100%;
 }
 
-h1 {
-    margin: 0;
+form button {
+    width: 100%;
 }
-
-main, header, footer {
-    box-sizing: border-box;
-}
-
-
-button {
-    display: inline-block;
-    aspect-ratio: 9 / 16;
-
-    /* box-sizing: border-box; */
-    background-color: rgb(20,174,103);
-    border: 1rem solid white;
-    border-radius: 2rem;
-    box-shadow: 1rem 1rem grey;
-
-    font-family: 'Helvetica', sans-serif;
-    color: rgb(218,223,0);
-    font-weight: bold;
-    font-size: 1.25rem;
-    text-transform: uppercase;
-}
-
-button:hover {
-    background-color: rgb(20, 197, 114);
-    cursor: pointer;
-}
-
-button:active {
-    box-shadow: 0.5rem 0.5rem grey;
-}
-
-/* Header Layout */
-
-header button {
-    height: 100%;
-    width: 15%;
-    margin: 0 5%;
-}
-
-/* Main Table */
 
 .table-wrapper {
     display: flex;
-    /* align-items: center; */
-    /* justify-content: flex-start; */
-    /* flex-direction: column; */
 
     width: 100%;
     height: 80%;
     margin: 0;
     padding: 0;
 }
-
 
 .table-box {
     aspect-ratio: 3 / 2;
@@ -112,11 +37,14 @@ header button {
     border-radius: 2rem;
 }
 
-.flex {
-    display: flex;
-    width: 100%;
-    height: 100%;
+.table-el {
+    display: inline-block;
+
     box-sizing: border-box;
+    margin: 2.5%;
+
+    background-color: rgb(56,54,53);
+    border: 1rem solid white;
 }
 
 .table-el {
@@ -215,14 +143,8 @@ header button {
 .add-point-btns-wrapper button {
     height: 50%;
     width: 15%;
-    margin: 0 5%;
-    
+    margin: 0 5%;   
 }
-
-/* Button Styles */
-
-
-/* Set History Table */
 
 .side-table-box {
     display: flex;
@@ -291,63 +213,4 @@ header button {
     font-family: 'Score Board', Helvetica, sans-serif;
     font-size: 5rem;
     color: rgb(218,223,0);
-}
-
-.main-menu-wrapper {
-    justify-content: space-around;
-}
-
-.main-menu-wrapper form {
-    align-items: center;
-    width: 25%;
-}
-
-.start-game-menu-wrapper form {
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.form-group {
-    font-size: 3rem;
-}
-
-form button {
-    height: 30%;
-    width: 100%;
-    font-size: 2rem;
-}
-
-label {
-    display: block;
-}
-
-.form-group {
-    align-items: center;
-    justify-content: space-around;
-
-    height: 100%;
-}
-
-.start-game-menu-wrapper button {
-    width: 30%;
-    height: 10%;
-    margin-bottom: 5%;
-}
-
-.form-group div {
-    height: 100%;
-    width: 30%;
-}
-
-input {
-    width: 100%;
-    height: 5%;    
-}
-
-
-/* Для тестирования макета с пустыми span */
-span:empty::before {
-    content: "\200b";
 }

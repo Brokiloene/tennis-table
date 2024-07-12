@@ -1,0 +1,69 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background-color: rgb(223, 211, 211);
+}
+
+main {
+    width: 100%;
+    height: 80%;
+}
+
+header, footer {
+    width: 100%;
+    height: 9%;
+}
+
+header {
+    text-align: start;
+    font-style: italic;
+}
+
+footer {
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main, header, footer {
+    box-sizing: border-box;
+}
+
+button {
+    display: inline-block;
+    aspect-ratio: 9 / 16;
+
+    background-color: rgb(20,174,103);
+    border: 1rem solid white;
+    border-radius: 2rem;
+    box-shadow: 1rem 1rem grey;
+
+    font-family: 'Helvetica', sans-serif;
+    color: rgb(218,223,0);
+    font-weight: bold;
+    /* font-size: 1.25rem; */
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: rgb(20, 197, 114);
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: 0.5rem 0.5rem grey;
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
