@@ -6,14 +6,25 @@
     <title>Tennis Table</title>
     <link href="https://fonts.cdnfonts.com/css/score-board" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
-    <link href="style.css" type="text/css" rel="stylesheet">
+    <link href="error-page.css" type="text/css" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Tennis Table</h1>
     </header>
     <main>
-        <h1>{{error_message}}</h1>
+        <div class="flex error-box-wrapper">
+            <div class="flex error-box">
+                <h1 class="table-text">ERROR</h1>
+                <div class="flex error-msg-wrapper">
+                    <span class="flex error-msg screen-text">{{error_message}}</span>
+                </div>
+                <form class="flex error-form" action="/">
+                    <button>MAIN MENU</button>
+                </form>
+            </div>
+        </div>
+        <h1></h1>
     </main>
     <footer>
         <h1>Footer</h1>

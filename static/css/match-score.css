@@ -47,7 +47,7 @@ form button {
     border: 1rem solid white;
 }
 
-.table-el {
+/* .table-el {
     display: inline-block;
 
     box-sizing: border-box;
@@ -55,7 +55,7 @@ form button {
 
     background-color: rgb(56,54,53);
     border: 1rem solid white;
-}
+} */
 
 .player-names {
     justify-content: space-between;

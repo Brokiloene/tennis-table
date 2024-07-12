@@ -1,0 +1,85 @@
+@import url("base.css");
+
+.error-box-wrapper {
+    justify-content: center;
+
+    width: 100%;
+    height: 80%;
+    margin: 0;
+    padding: 0;
+}
+.error-box {
+    justify-content: center;
+    flex-wrap: wrap;
+
+    aspect-ratio: 3 / 2;
+
+    width: 50%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    box-shadow: 1rem 1rem grey;
+    background-color: rgb(20,174,103);
+    border: 1rem solid white;
+    border-radius: 2rem;
+}
+
+.table-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgb(218,223,0);
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+    font-size: 4rem;    
+}
+
+.screen-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgb(218,223,0);
+    font-weight: bold;
+    font-family: 'Score Board', Helvetica, sans-serif;
+    font-size: 1.5rem;    
+}
+
+
+h1 {
+    height: 30%;
+    width: 100%;
+}
+
+span.error-msg {
+    justify-content: center;
+
+    height: 50%;
+    width: 60%;   
+
+    background-color: rgb(56,54,53);
+    border: 1rem solid white;
+}
+
+.error-msg-wrapper {
+    justify-content: center;
+    /* align-items: center; */
+
+    height: 30%;
+}
+
+form.error-form {
+    justify-content: center;
+
+    height: 40%;
+    width: 100%;
+}
+
+
+form button {
+    width: 50%;
+    height: 80%;
+}
+
