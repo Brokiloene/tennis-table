@@ -1,22 +1,36 @@
 @import url("base.css");
 
-.start-game-menu-wrapper form {
+main form {
+    display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    
+    box-sizing: border-box;
+
+    height: 100%;
     width: 100%;
 }
 
-/* .form-group {
-    font-size: 3rem;
-} */
 .form-group {
+    display: flex;
     align-items: center;
     justify-content: space-around;
+    
+    box-sizing: border-box;
 
     height: 100%;
+    width: 100%;
 
     font-size: 3rem;
+}
+
+.player-names {
+    display: flex;
+    
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 }
 
 .form-group div {
@@ -29,7 +43,7 @@ input {
     height: 5%;    
 }
 
-.start-game-menu-wrapper button {
+main button {
     width: 30%;
     height: 10%;
     margin-bottom: 5%;

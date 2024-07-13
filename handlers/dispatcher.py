@@ -14,7 +14,7 @@ class Dispatcher(BaseHandler):
             "/": IndexController,
             "/new-match": NewMatchController,
             "/match-score": MatchScoreController,
-            "/matches": MatchesHistoryController
+            "/matches": None
         }
 
     def __call__(self, environ, start_response) -> Any:

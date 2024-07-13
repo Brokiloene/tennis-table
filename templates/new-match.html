@@ -13,9 +13,9 @@
         <h1>Tennis Table Project</h1>
     </header>
     <main>
-        <div class="start-game-menu-wrapper flex">
-            <form method="post" name="player-names" class="flex" action="/new-match">
-                <div class="form-group flex">
+        <!-- <div class="start-game-menu-wrapper"> -->
+            <form method="post" name="player-names" class="player-names" action="/new-match">
+                <div class="form-group">
                     <div>
                         <label for="name-p1">First Player</label>
                         <input required minlength="2" maxlength="26" type="text" name="name-p1" id="name-p1" placeholder="Enter a name...">
@@ -27,7 +27,7 @@
                 </div>
                 <button>Start the match</button>
             </form>
-        </div>
+        <!-- </div> -->
     </main>
     <footer>
         <h1>Footer</h1>
