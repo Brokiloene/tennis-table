@@ -61,7 +61,6 @@ h1 {
 
     height: 30%;
     width: 100%;
-    /* box-sizing: border-box; */
 }
 
 form.error-form {
@@ -70,12 +69,9 @@ form.error-form {
 
     height: 40%;
     width: 100%;
-    /* box-sizing: border-box; */
 }
-
 
 form button {
     width: 50%;
     height: 80%;
 }
-

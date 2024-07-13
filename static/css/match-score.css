@@ -133,7 +133,7 @@ form button {
 
 .add-point-btns-wrapper button {
     height: 50%;
-    width: 15%;
+    width: 20%;
     margin: 0 5%;   
 }
 
@@ -151,7 +151,7 @@ form button {
 .side-table h2 {
     display: block;
 
-    height: 5%;
+    height: 10%;
     padding-top: 5%;
     margin: 0;
     box-sizing: border-box;
