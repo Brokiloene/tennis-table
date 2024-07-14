@@ -13,21 +13,19 @@
         <h1>Tennis Table Project</h1>
     </header>
     <main>
-        <!-- <div class="start-game-menu-wrapper"> -->
-            <form method="post" name="player-names" class="player-names" action="/new-match">
-                <div class="form-group">
-                    <div>
-                        <label for="name-p1">First Player</label>
-                        <input required minlength="2" maxlength="26" type="text" name="name-p1" id="name-p1" placeholder="Enter a name...">
-                    </div>
-                    <div>
-                        <label for="name-p2">Second Player</label>
-                        <input required minlength="2" maxlength="26" type="text" name="name-p2" id="name-p2" placeholder="Enter a name...">
-                    </div>
+        <form method="post" name="player-names" class="player-names" action="/new-match">
+            <div class="form-group">
+                <div>
+                    <label for="name-p1">First Player</label>
+                    <input required minlength="2" maxlength="26" type="text" name="name-p1" id="name-p1" placeholder="Enter the name of Player 1">
                 </div>
-                <button>Start the match</button>
-            </form>
-        <!-- </div> -->
+                <div>
+                    <label for="name-p2">Second Player</label>
+                    <input required minlength="2" maxlength="26" type="text" name="name-p2" id="name-p2" placeholder="Enter the name of Player 2">
+                </div>
+            </div>
+            <button>Start the match</button>
+        </form>
     </main>
     <footer>
         <h1>Footer</h1>

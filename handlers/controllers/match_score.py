@@ -1,4 +1,4 @@
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs
 
 from services import MatchService
 from .base import BaseController
@@ -44,5 +44,7 @@ class MatchScoreController(BaseController):
     def get_match_by_uuid(self, environ):
         query = environ['QUERY_STRING']
         match_uuid = parse_qs(query)['uuid'][0]
+        print(MatchService.ongoing_matches)
+        print(match_uuid)
         return MatchService.ongoing_matches[match_uuid]
         

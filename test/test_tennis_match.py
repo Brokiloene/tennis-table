@@ -52,7 +52,7 @@ class TestMatch(unittest.TestCase):
         self.assertEqual(self.match.winner, "Player1")
         self.assertEqual(self.match.p1_sets_won, 2)
 
-    def test_to_win_set_2_game_advantage_is_needed(self):
+    def test_to_win_set_two_game_advantage_is_needed(self):
         pts_win_order = [1,1,1,1]*5 + [2,2,2,2]*6
         self.set_up_match(pts_win_order)
         
@@ -87,7 +87,7 @@ class TestMatch(unittest.TestCase):
         self.assertEqual(self.match.p2_sets_won, 0)
         self.assertTrue(self.match.is_tiebreak)
 
-    def test_to_win_game_4_pts_with_advantage_needed(self):
+    def test_to_win_game_two_pts_advantage_is_needed(self):
         pts_win_order = [1,1, 2,2,2,2]
         self.set_up_match(pts_win_order)
 
