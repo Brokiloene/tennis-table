@@ -43,7 +43,7 @@ main, header, footer {
 
 .table-text-screen {
     background-color: rgb(56,54,53);
-    border: 1.5vh solid white;
+    border: 1vh solid white;
 
     color: rgb(218,223,0);
     /* font-weight: bold; */
