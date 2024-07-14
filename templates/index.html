@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Tennis Table</title>
-    <link href="https://fonts.cdnfonts.com/css/score-board" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
-    <link href="index.css" type="text/css" rel="stylesheet">
-</head>
+{% extends "layout/base.html" %}
+{% block title %}Main Menu{% endblock %}
+{% block css_file %}"index.css"{% endblock %}
 
-<body>
-    <header>
-        <h1>Tennis Table Project</h1>
-    </header>
-    <main>
-        <div class="main-menu-wrapper">
-            <form action="/new-match">
-                <button type="submit">New Match</button>
-            </form>
-            <form action="/matches">
-                <button type="submit">History</button>        
-            </form>
-        </div>
-    </main>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
-
-</body>
-</html>
+{% block content %}
+<div class="main-menu-wrapper">
+    <form action="/new-match">
+        <button type="submit">New Match</button>
+    </form>
+    <form action="/matches">
+        <button type="submit">History</button>        
+    </form>
+</div>
+{% endblock %}

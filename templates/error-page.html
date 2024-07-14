@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Tennis Table</title>
-    <link href="https://fonts.cdnfonts.com/css/score-board" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
-    <link href="error-page.css" type="text/css" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <h1>Tennis Table</h1>
-    </header>
-    <main>
-        <div class="table error-table">
-            <h1 class="table-text-regular centered-flex">ERROR</h1>
-            <div class="error-msg-wrapper">
-                <span class="error-msg table-text-screen centered-flex">{{error_message}}</span>
-            </div>
-            <form class="error-form" action="/">
-                <button>MAIN MENU</button>
-            </form>
-        </div>
-    </main>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
-</body>
+{% extends "layout/base.html" %}
+{% block title %}Main Menu{% endblock %}
+{% block css_file %}"error-page.css"{% endblock %}
+
+{% block content %}
+<div class="table error-table">
+    <h1 class="table-text-regular centered-flex">ERROR</h1>
+    <div class="error-msg-wrapper">
+        <span class="error-msg table-text-screen centered-flex">{{error_message}}</span>
+    </div>
+    <form class="error-form" action="/">
+        <button>MAIN MENU</button>
+    </form>
+</div>
+{% endblock %}

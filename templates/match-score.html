@@ -1,95 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Tennis Table</title>
-    <link href="https://fonts.cdnfonts.com/css/score-board" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
-    <link href="match-score.css" type="text/css" rel="stylesheet">
-</head>
+{% extends "layout/base.html" %}
+{% block title %}Tennis Match{% endblock %}
+{% block css_file %}"match-score.css"{% endblock %}
 
-<body>
-    <header>
-        <h1>Tennis Table Project</h1>
-    </header>
-    <main>
-        <div class="wrapper">
-            <aside>
-                <div class="table side-table">
-                    <h2 class="table-text-regular">SET HISTORY</h2>
-                    <div class="set-info">
-                        <span class="table-text-screen set-digit table-el" id="s1-d1">{{set1_p1}}</span>
-                        <span class="table-text-screen set-digit table-el" id="s1-d2">{{set1_p2}}</span>
-                    </div>
-                    <div class="set-info">
-                        <span class="table-text-screen set-digit table-el" id="s2-d1">{{set2_p1}}</span>
-                        <span class="table-text-screen set-digit table-el" id="s2-d2">{{set2_p2}}</span>
-                    </div>
-                    <div class="set-info">
-                        <span class="table-text-screen set-digit table-el" id="s3-d1">{{set3_p1}}</span>
-                        <span class="table-text-screen set-digit table-el" id="s3-d2">{{set3_p2}}</span>
-                    </div>
-                </div>
-            </aside>
-
-            <div class="table main-table">
-                <div class="player-names">
-                    <span class="table-text-screen table-el p-name centered-flex" id="name-p1">{{name_p1}}</span>
-                    <span class="table-text-screen table-el p-name centered-flex" id="name-p2">{{name_p2}}</span>
-                </div>
-                
-                 <div class="score-points">
-                    <div class="game-score" id="points-p1">
-                        <span class="table-text-screen table-el score-digit centered-flex" id="p1-digit-1">{{p1_digit_1}}</span>
-                        <span class="table-text-screen table-el score-digit centered-flex" id="p1-digit-2">{{p1_digit_2}}</span>
-                    </div>
-
-                    <div class="table-colon">
-                        <span class="dot"></span> 
-                        <span class="dot"></span>
-                    </div>
-
-                    <div class="game-score" id="points-p2">
-                        <span class="table-text-screen table-el score-digit centered-flex" id="p2-digit-1">{{p2_digit_1}}</span>
-                        <span class="table-text-screen table-el score-digit centered-flex" id="p2-digit-2">{{p2_digit_2}}</span>
-                    </div>
-                </div>
-                
-                <div class="score-sets">
-                    <span class="table-text-screen table-el p-sets centered-flex" id="sets-p1">{{cur_set_p1}}</span>
-                    <span class="table-text-regular table-text">SET</span>
-                    <span class="table-text-screen table-el p-sets centered-flex" id="sets-p2">{{cur_set_p2}}</span>
-                </div>
+{% block content %}
+<div class="wrapper">
+    <aside>
+        <div class="table side-table">
+            <h2 class="table-text-regular">SET HISTORY</h2>
+            <div class="set-info">
+                <span class="table-text-screen set-digit table-el" id="s1-d1">{{set1_p1}}</span>
+                <span class="table-text-screen set-digit table-el" id="s1-d2">{{set1_p2}}</span>
             </div>
-            <aside>
-                <div class="side-table table">
-                    <h2 class="table-text-regular">MATCH STATUS</h2>
-                    <span class="table-text-screen table-el table-text match-status">{{match_status}}</span>
-                    <form action="/">
-                        <button class="table-text-regular">MAIN MENU</button>
-                    </form>
-                    <form action="/new-match">
-                        <button class="table-text-regular">NEW MATCH</button>
-                    </form>
-                    <form action="/matches">
-                        <button class="table-text-regular">ALL MATCHES</button>
-                    </form>
-                    
-                </div>
-            </aside> 
+            <div class="set-info">
+                <span class="table-text-screen set-digit table-el" id="s2-d1">{{set2_p1}}</span>
+                <span class="table-text-screen set-digit table-el" id="s2-d2">{{set2_p2}}</span>
+            </div>
+            <div class="set-info">
+                <span class="table-text-screen set-digit table-el" id="s3-d1">{{set3_p1}}</span>
+                <span class="table-text-screen set-digit table-el" id="s3-d2">{{set3_p2}}</span>
+            </div>
         </div>
-        <form class="change-score-form" method="post" name="change-score">
-            <div class="add-point-btns-wrapper">
-                <button class="table-text-regular" type="submit" name="p1-scores" value="p1-scores">Add point</button>
-                <button class="table-text-regular" type="submit" name="p2-scores" value="p2-scores">Add point</button>
+    </aside>
+    <div class="table main-table">
+        <div class="player-names">
+            <span class="table-text-screen table-el p-name centered-flex" id="name-p1">{{name_p1}}</span>
+            <span class="table-text-screen table-el p-name centered-flex" id="name-p2">{{name_p2}}</span>
+        </div>
+            <div class="score-points">
+            <div class="game-score" id="points-p1">
+                <span class="table-text-screen table-el score-digit centered-flex" id="p1-digit-1">{{p1_digit_1}}</span>
+                <span class="table-text-screen table-el score-digit centered-flex" id="p1-digit-2">{{p1_digit_2}}</span>
             </div>
-        </form>
-
-    </main>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
-
-</body>
-</html>
+            <div class="table-colon">
+                <span class="dot"></span> 
+                <span class="dot"></span>
+            </div>
+            <div class="game-score" id="points-p2">
+                <span class="table-text-screen table-el score-digit centered-flex" id="p2-digit-1">{{p2_digit_1}}</span>
+                <span class="table-text-screen table-el score-digit centered-flex" id="p2-digit-2">{{p2_digit_2}}</span>
+            </div>
+        </div>
+        <div class="score-sets">
+            <span class="table-text-screen table-el p-sets centered-flex" id="sets-p1">{{cur_set_p1}}</span>
+            <span class="table-text-regular table-text">SET</span>
+            <span class="table-text-screen table-el p-sets centered-flex" id="sets-p2">{{cur_set_p2}}</span>
+        </div>
+    </div>
+    <aside>
+        <div class="side-table table">
+            <h2 class="table-text-regular">MATCH STATUS</h2>
+            <span class="table-text-screen table-el table-text match-status">{{match_status}}</span>
+            <form action="/">
+                <button class="table-text-regular">MAIN MENU</button>
+            </form>
+            <form action="/new-match">
+                <button class="table-text-regular">NEW MATCH</button>
+            </form>
+            <form action="/matches">
+                <button class="table-text-regular">ALL MATCHES</button>
+            </form>
+        </div>
+    </aside> 
+</div>
+<form class="change-score-form" method="post" name="change-score">
+    <div class="add-point-btns-wrapper">
+        <button class="table-text-regular" type="submit" name="p1-scores" value="p1-scores">Add point</button>
+        <button class="table-text-regular" type="submit" name="p2-scores" value="p2-scores">Add point</button>
+    </div>
+</form>
+{% endblock %}
