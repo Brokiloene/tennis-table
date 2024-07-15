@@ -107,9 +107,6 @@ class TestMatch(unittest.TestCase):
 
         self.assertEqual(self.match.sets[0][0], 0)
         self.assertEqual(self.match.sets[0][1], 0)
-        
-    
-
 
 
 if __name__ == '__main__':

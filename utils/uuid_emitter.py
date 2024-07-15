@@ -1,5 +1,4 @@
-import uuid
-
-def get_uuid():
-    return str(uuid.uuid4())
+from uuid import uuid4, UUID
+def get_uuid() -> UUID:
+    return uuid4()
 

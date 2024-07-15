@@ -1,1 +1,1 @@
-from .uuid_emitter import get_uuid
+from .uuid_emitter import get_uuid, UUID

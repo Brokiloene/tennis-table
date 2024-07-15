@@ -1,5 +1,5 @@
 from services import MatchService
-from utils import get_uuid
+from utils import UUID
 from .base import BaseController
 
 class NewMatchController(BaseController):
@@ -22,10 +22,10 @@ class NewMatchController(BaseController):
             player2_name: str = form_data['name-p2'][0]
         except KeyError:
             return self.send_error(environ, start_response, "400 Bad Request")
-        match_uuid = MatchService.create_match(player1_name, player2_name)
+        match_uuid: UUID = MatchService.create_match(player1_name, player2_name)
 
         status = '303 See other'
-        self.response_headers.append(('Location', f'/match-score?uuid={match_uuid}'))
+        self.response_headers.append(('Location', f'/match-score?uuid={str(match_uuid)}'))
         page = 'Redirecting...'
         self.response_headers.append(
             ('Content-Length', str(len(page)))
