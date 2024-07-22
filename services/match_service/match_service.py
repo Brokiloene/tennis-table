@@ -2,7 +2,9 @@ import threading
 from typing import Dict, List
 
 from utils import get_uuid, UUID
-from exceptions import MatchNotFoundError
+from exceptions import MatchNotFoundError, PlayerNamesAreTheSameError
+from dao import PlayerDAO, MatchDAO
+from dto import CreateMatchDTO, ReadPlayerDTO, ReadMatchDTO
 from .tennis_game_logic import Match
 
 class MatchService:
@@ -11,8 +13,13 @@ class MatchService:
     lock = threading.Lock()
 
     def create_match(p1_name: str, p2_name: str):
+        if p1_name == p2_name:
+            raise PlayerNamesAreTheSameError()
+
         match_uuid = get_uuid()
         with MatchService.lock:
+            PlayerDAO.insert_one(p1_name)
+            PlayerDAO.insert_one(p2_name)
             MatchService.ongoing_matches[match_uuid] = Match(p1_name, p2_name)
         return match_uuid
     
@@ -28,8 +35,27 @@ class MatchService:
             return MatchService.ongoing_matches[match_uuid].serialize()
 
     def save_finished_match(match_uuid: UUID):
-        # здесь взаимодействия с DAO и сохранение матча
+        with MatchService.lock:
+            match_obj = MatchService.ongoing_matches[match_uuid]
+            match_result = match_obj.get_result_data()
+            p1_name = match_obj.p1_name
+            p2_name = match_obj.p2_name
+            p1_id = PlayerDAO.select_one_by_name(p1_name).p_id
+            p2_id = PlayerDAO.select_one_by_name(p2_name).p_id
+            if p1_name == match_obj.winner:
+                winner_id = p1_id
+            else:
+                winner_id = p2_id
+            
+            dto = CreateMatchDTO(
+                uuid=str(match_uuid), 
+                player1_id=p1_id, 
+                player2_id=p2_id, 
+                winner_id=winner_id, 
+                score=match_result
+                )
 
+            MatchDAO.insert_one(dto)
 
         need_to_clear_cache = False
         with MatchService.lock:

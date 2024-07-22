@@ -37,7 +37,6 @@ form button {
     margin: 2.5%;
 }
 
-
 .player-names {
     display: flex;
     justify-content: space-between;
@@ -92,10 +91,6 @@ form button {
 }
 
 .score-sets {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     height: 30%;
     width: 100%;
 }
@@ -108,7 +103,6 @@ form button {
     width: 25%;
 
     font-size: 4rem;
-    font-family: 'Helvetica', sans-serif;
 }
 
 .table-text {
@@ -157,9 +151,6 @@ form button {
     box-sizing: border-box;
     
     font-size: 2rem;
-    font-family: 'Helvetica', sans-serif;
-    color: rgb(218,223,0);
-    text-align: center;
 }
 
 .side-table .match-status {
@@ -188,13 +179,6 @@ form button {
 }
 
 .set-digit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 30%;
-    
-    font-family: 'Score Board', Helvetica, sans-serif;
+    width: 30%;    
     font-size: 5rem;
-    color: rgb(218,223,0);
 }

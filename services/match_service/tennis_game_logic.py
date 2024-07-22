@@ -172,4 +172,7 @@ class Match:
         vals = itertools.chain(*self.sets)
         d |= {k:v for k, v in zip(keys, vals)}
         return d
-
+    
+    def get_result_data(self):
+        sets_flatten = itertools.chain(*self.sets)
+        return ' '.join(map(str, sets_flatten)) 

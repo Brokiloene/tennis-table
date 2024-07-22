@@ -1,5 +1,5 @@
 from dataclasses import asdict
 
-class BaseDto:
-    def as_dict(self):
+class BaseDTO:
+    def asdict(self):
         return asdict(self)

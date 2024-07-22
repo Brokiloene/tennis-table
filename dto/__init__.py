@@ -1,1 +1,2 @@
-from player_names import PlayerNamesDTO
+from .match import ReadMatchDTO, CreateMatchDTO
+from .player import ReadPlayerDTO
