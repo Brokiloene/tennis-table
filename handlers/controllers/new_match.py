@@ -6,12 +6,12 @@ from .base import BaseController
 class NewMatchController(BaseController):
     def do_GET(self, environ, start_response):
         status = "200 OK"
-        page = self.view.render("new-match", dict())
+        html_page = self.view.render("new-match", dict())
         self.response_headers.append(
-            ('Content-Length', str(len(page)))
+            ('Content-Length', str(len(html_page)))
         )
         start_response(status, self.response_headers)
-        return [bytes(page, 'utf-8')]
+        return [bytes(html_page, 'utf-8')]
     
     def do_POST(self, environ, start_response):
         try:
@@ -31,9 +31,9 @@ class NewMatchController(BaseController):
 
         status = '303 See other'
         self.response_headers.append(('Location', f'/match-score?uuid={str(match_uuid)}'))
-        page = 'Redirecting...'
+        html_page = 'Redirecting...'
         self.response_headers.append(
-            ('Content-Length', str(len(page)))
+            ('Content-Length', str(len(html_page)))
         )
         start_response(status, self.response_headers)
-        return [bytes(page, 'utf-8')]
+        return [bytes(html_page, 'utf-8')]

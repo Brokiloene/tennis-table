@@ -18,9 +18,6 @@ class PlayerDAO(BaseDAO):
                 session.add(player)
                 session.flush()
                 session.commit()
-                # print("===>", player.name, player.id)
-            # else:
-                # print("==->", player.name, player.id)
 
         print("===>", player.name, player.id)
         return player.id

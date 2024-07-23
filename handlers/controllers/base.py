@@ -9,7 +9,6 @@ class BaseController(BaseHandler):
             ('Content-type', 'text/html')
             ]
 
-        
     def __call__(self, environ, start_response):
         method = environ.get('REQUEST_METHOD', None)
         match method:
@@ -30,6 +29,11 @@ class BaseController(BaseHandler):
         request_body_size = int(environ.get('CONTENT_LENGTH', 0))
         request_body = environ['wsgi.input'].read(request_body_size)
         return parse_qs(request_body.decode('utf-8'))
+    
+    def get_query_param(self, environ, param: str) -> str:
+        query = environ['QUERY_STRING']
+        res = parse_qs(query)[param][0]
+        return res
 
     def __iter__(self):
         pass

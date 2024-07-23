@@ -10,7 +10,8 @@ from .base import BaseController
 class MatchScoreController(BaseController):
     def do_POST(self, environ, start_response):
         try:
-            match_uuid: UUID = self.get_match_uuid(environ)
+            # match_uuid: UUID = self.get_match_uuid(environ)
+            match_uuid = UUID(self.get_query_param(environ, 'uuid'))
         except KeyError:
             return self.send_error(environ, start_response, '400 Bad Request')
 
@@ -29,15 +30,16 @@ class MatchScoreController(BaseController):
         if view_data["match_status"] == "match is over":
             MatchService.save_finished_match(match_uuid)
 
-        page = self.view.render("match-score", view_data)
+        html_page = self.view.render("match-score", view_data)
         status = "200 OK"
         start_response(status, self.response_headers)
-        return [bytes(page, 'utf-8')]
+        return [bytes(html_page, 'utf-8')]
   
     
     def do_GET(self, environ, start_response):
         try:
-            match_uuid: UUID = self.get_match_uuid(environ)
+            # match_uuid: UUID = self.get_match_uuid(environ)
+            match_uuid = UUID(self.get_query_param(environ, 'uuid'))
         except KeyError:
             return self.send_error(environ, start_response, '400 Bad Request')
 
@@ -46,12 +48,12 @@ class MatchScoreController(BaseController):
         except MatchNotFoundError:
             return self.send_error(environ, start_response, '400 Bad Request')
         
-        page = self.view.render("match-score", view_data)
+        html_page = self.view.render("match-score", view_data)
         status = "200 OK"
         start_response(status, self.response_headers)
-        return [bytes(page, 'utf-8')]
+        return [bytes(html_page, 'utf-8')]
      
-    def get_match_uuid(self, environ) -> UUID:
-        query = environ['QUERY_STRING']
-        uuid_str = parse_qs(query)['uuid'][0]
-        return UUID(uuid_str)
+    # def get_match_uuid(self, environ) -> UUID:
+    #     query = environ['QUERY_STRING']
+    #     uuid_str = parse_qs(query)['uuid'][0]
+    #     return UUID(uuid_str)
