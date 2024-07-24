@@ -11,8 +11,17 @@ sqlalchemy = "^2.0.31"
 jinja2 = "^3.1.4"
 waitress = "^3.0.0"
 mysql-connector-python = "^9.0.0"
+alembic = "^1.13.2"
+python-dotenv = "^1.0.1"
+sqlalchemy-utils = "^0.41.2"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+create_db = "poetry_scripts.create_db:start"
+fill_db = "poetry_scripts.fill_db:start"
+run_server = "poetry_scripts.run_server:start"
+init_db_and_start_app = "sh -c 'poetry run create_db && alembic upgrade head && poetry run fill_db && poetry run run_server'"

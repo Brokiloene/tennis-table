@@ -27,4 +27,4 @@ class LoggingMiddleware(BaseMiddleware):
 
         except Exception as e:
             self.logger.exception(e)
-            self.send_error(environ, log_start_response, "500 Internal Server Error")
+            self.send_error_page(environ, log_start_response, "500 Internal Server Error")

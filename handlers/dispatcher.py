@@ -24,4 +24,4 @@ class Dispatcher(BaseHandler):
             controller = controller_type()
             return controller(environ, start_response)
         else:
-            return self.send_error(environ, start_response, "404 Not Found")
+            return self.send_error_page(environ, start_response, "404 Not Found")

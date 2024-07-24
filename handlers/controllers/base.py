@@ -17,7 +17,7 @@ class BaseController(BaseHandler):
             case 'POST':
                 return self.do_POST(environ, start_response)
             case None:
-                return self.send_error(environ, start_response, '400 Bad Request')
+                return self.send_error_page(environ, start_response, '400 Bad Request')
     
     def do_GET(self, environ, start_response):
         pass
@@ -34,6 +34,25 @@ class BaseController(BaseHandler):
         query = environ['QUERY_STRING']
         res = parse_qs(query)[param][0]
         return res
+    
+    def send_page(self, html_page, start_response):
+        status = "200 OK"
+        self.response_headers.append(
+            ('Content-Length', str(len(html_page)))
+        )
+        start_response(status, self.response_headers)
+        return [bytes(html_page, 'utf-8')]
+
+
+    def redirect_to(self, location: str, start_response):
+        status = '303 See other'
+        self.response_headers.append(('Location', location))
+        html_page = 'Redirecting...'
+        self.response_headers.append(
+            ('Content-Length', str(len(html_page)))
+        )
+        start_response(status, self.response_headers)
+        return [bytes(html_page, 'utf-8')]
 
     def __iter__(self):
         pass

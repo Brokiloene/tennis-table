@@ -3,10 +3,10 @@ from typing import Annotated
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-from config.settings import DATABASE_URL
+from config.settings import DB_URL
 
 engine = create_engine(
-    url=DATABASE_URL,
+    url=DB_URL,
     echo=True,
     pool_size=5,
     max_overflow=10,
