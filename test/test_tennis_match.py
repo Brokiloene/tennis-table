@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(testdir, srcdir)))
 import unittest
 from typing import List
 
-from services.match_service.tennis_game_logic import Match
+from tennis_app.services.match_service.tennis_game_logic import Match
 
 
 class TestMatch(unittest.TestCase):

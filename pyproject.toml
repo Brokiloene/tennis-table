@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "tennis-table"
+name = "tennis-app"
 version = "0.1.0"
 description = ""
 authors = ["Brokiloene <brklvn.minor@gmail.com>"]
@@ -21,7 +21,6 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-create_db = "poetry_scripts.create_db:start"
-fill_db = "poetry_scripts.fill_db:start"
-run_server = "poetry_scripts.run_server:start"
-init_db_and_start_app = "sh -c 'poetry run create_db && alembic upgrade head && poetry run fill_db && poetry run run_server'"
+init_db = "tennis_app.poetry_scripts.init_db:start"
+run_server = "tennis_app.poetry_scripts.run_server:start"
+init_db_and_run = "tennis_app.poetry_scripts.init_db_and_run:start"
