@@ -7,6 +7,8 @@ from tennis_app.dto import ReadMatchDTO
 class MatchesHistoryService:
     def get_all_matches() -> List[ReadMatchDTO]:
         return MatchDAO.fetch_all()
+    def get_matches_filtered_by_name(search_name: str):
+        return MatchDAO.fetch_all_filtered_by_name(search_name=search_name)
     
     def serialize(match_data: ReadMatchDTO, cur_page: int, max_page: int):
         d = {}

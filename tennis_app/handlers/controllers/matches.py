@@ -6,10 +6,21 @@ from .base import BaseController
 class MatchesHistoryController(BaseController):    
     def do_GET(self, environ, start_response):
         try:
+            query_string = environ.get('QUERY_STRING', '')
             cur_page = int(self.get_query_param(environ, 'page'))
         except KeyError:
+            print(query_string)
             return self.send_error_page(environ, start_response, "400 Bad Request")
-        all_matches = MatchesHistoryService.get_all_matches()
+        try:
+            search_name = self.get_query_param(environ, 'filter_by_player_name')
+        except KeyError:
+            search_name = None
+        
+        if search_name is not None:
+            all_matches = MatchesHistoryService.get_matches_filtered_by_name(search_name)
+        else:
+            all_matches = MatchesHistoryService.get_all_matches()
+
         max_page=max(ceil( len(all_matches)/2 ), 1)
 
         if cur_page < 1:

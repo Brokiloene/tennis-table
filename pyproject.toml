@@ -21,6 +21,6 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-init_db = "tennis_app.poetry_scripts.init_db:start"
+recreate_db = "tennis_app.poetry_scripts.recreate_db:start"
 run_server = "tennis_app.poetry_scripts.run_server:start"
-init_db_and_run = "tennis_app.poetry_scripts.init_db_and_run:start"
+recreate_db_and_run = "tennis_app.poetry_scripts.recreate_db_and_run:start"

@@ -4,6 +4,7 @@
 {% block css_file %}"matches.css"{% endblock %}
 
 {% block content %}
+<script src="matches.js"></script>
 <div class="wrapper">
     <div class="table matches-table">
         <h1 class="table-text-regular">MATCHES HISTORY</h1>
@@ -24,15 +25,16 @@
 
             <div class="matches-nav">
                 <form class="search-form" action="">
-                    <button name="submit-button" value="reset-search-query" class="search-btn centered-flex">RESET</button>
+                    <input type="hidden" name="page" value="1">
+                    <button name="" value="reset-search-query" class="search-btn centered-flex">RESET</button>
                     <h2 class="table-text-regular centered-flex">SEARCH</h2>
-                    <button name="submit-button" value="enter-search-query" class="search-btn centered-flex">ENTER</button>
-                    <input class="table-text-screen" type="text" placeholder="ENTER FULL NAME...">
+                    <button class="search-btn centered-flex">ENTER</button>
+                    <input name="filter_by_player_name" class="table-text-screen" type="text" placeholder="ENTER FULL NAME...">
                 </form>
             <div class="page-nav-wrapper">
                 <form action="/matches" class="page-nav-form">
                     <input type=hidden name=page value={{prev_page_num}}>
-                    <button class="page-nav-btn">
+                    <button id="prev-page-btn" name="page" value={{prev_page_num}} type="button" class="page-nav-btn">
                         <svg width="206" height="496" viewBox="0 0 206 496" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M54.0054 247.996L201.6 458.783C207.936 467.832 205.737 480.302 196.689 486.638L188.497 492.374C179.449 498.709 166.978 496.51 160.643 487.462L3.61868 263.209C0.394639 258.605 -0.61931 253.114 0.354735 247.996C-0.619279 242.879 0.394676 237.388 3.61869 232.784L160.643 8.53019C166.978 -0.51791 179.449 -2.71688 188.497 3.61867L196.689 9.35444C205.737 15.69 207.936 28.1609 201.6 37.209L54.0054 247.996Z" fill="#DADF00"/>
                         </svg>                                                                
@@ -42,7 +44,7 @@
                 <span class="table-text-screen centered-flex">{{cur_page_d2}}</span>
                 <form action="" class="page-nav-form">
                     <input type=hidden name=page value={{next_page_num}}>
-                    <button class="page-nav-btn">
+                    <button id="next-page-btn" name="page" value={{next_page_num}} type="button" class="page-nav-btn">
                         <svg width="206" height="496" viewBox="0 0 206 496" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M151.995 248.004L4.39999 37.217C-1.93601 28.168 0.263004 15.698 9.311 9.362L17.503 3.62601C26.551 -2.70899 39.022 -0.510006 45.357 8.53799L202.381 232.791C205.605 237.395 206.619 242.886 205.645 248.004C206.619 253.121 205.605 258.612 202.381 263.216L45.357 487.47C39.022 496.518 26.551 498.717 17.503 492.381L9.311 486.646C0.263004 480.31 -1.93601 467.839 4.39999 458.791L151.995 248.004Z" fill="#DADF00"/>
                         </svg>

@@ -1,6 +1,6 @@
 from typing import List
 
-from sqlalchemy import select
+from sqlalchemy import select, or_
 
 from tennis_app.dto import CreateMatchDTO, ReadMatchDTO
 from tennis_app.models import MatchModel, PlayerModel
@@ -33,4 +33,28 @@ class MatchDAO(BaseDAO):
                 ))
         print(matches_dtos)
         return matches_dtos
+    
+    def fetch_all_filtered_by_name(search_name: str):
+        matches_dtos = []
+        with BaseDAO.new_session() as session:
+            get_player_id_stmt = select(PlayerModel.id).filter(PlayerModel.name.ilike(search_name))
+            player_id = session.execute(get_player_id_stmt).scalar_one_or_none()
+            stmt = select(MatchModel).where(
+                or_(MatchModel.player1_id == player_id, 
+                    MatchModel.player2_id == player_id)
+                )
+            all_matches = session.execute(stmt).scalars().all()
+            for match in all_matches:
+                p1_name = session.get(PlayerModel, match.player1_id).name
+                p2_name = session.get(PlayerModel, match.player2_id).name
+                matches_dtos.append(ReadMatchDTO(
+                    player1_name=p1_name,
+                    player2_name=p2_name,
+                    score=match.score
+                ))
+        print(matches_dtos)
+        return matches_dtos
+            
+
+            
                 

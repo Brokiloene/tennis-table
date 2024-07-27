@@ -1,10 +1,12 @@
 
-def create_db_if_not_exist():
-    from sqlalchemy_utils import database_exists, create_database
+def recreate_db():
+    from sqlalchemy_utils import database_exists, create_database, drop_database
     from tennis_app.models import engine
 
-    if not database_exists(engine.url):
-        create_database(engine.url)
+    if database_exists(engine.url):
+        drop_database(engine.url)
+    create_database(engine.url)
+    
 
 def test_fill_db():
     from tennis_app.dto import CreateMatchDTO
@@ -22,7 +24,9 @@ def test_fill_db():
         "Andre Agassi", #9
         "Fernando Verdasco", #10
         "Andy Roddick", #11
-        "Novac Djokovic" #12
+        "Novac Djokovic", #12
+        "Stanislas Wawrinka", #13
+        "Juan Martin del Potro" # 14
     ]
     matches = [
         CreateMatchDTO(
@@ -87,6 +91,20 @@ def test_fill_db():
             player2_id=6,
             winner_id=12,
             score="5 7 6 4 6 2"
+        ),
+        CreateMatchDTO(
+            uuid='test-match-10',
+            player1_id=6,
+            player2_id=13,
+            winner_id=6,
+            score="6 2 6 3 6 1"
+        ),
+        CreateMatchDTO(
+            uuid='test-match-11',
+            player1_id=6,
+            player2_id=14,
+            winner_id=6,
+            score="1 6 6 1 7 6"
         )
     ]
 
@@ -96,7 +114,7 @@ def test_fill_db():
         MatchDAO.insert_one(dto=match_dto)
 
 def start():
-    create_db_if_not_exist()
+    recreate_db()
 
     import subprocess
     subprocess.run("alembic revision --autogenerate -m 'Create database'", shell=True)
