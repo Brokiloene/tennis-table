@@ -21,7 +21,6 @@ class MatchService:
             PlayerDAO.insert_one(p1_name)
             PlayerDAO.insert_one(p2_name)
             MatchService.ongoing_matches[match_uuid] = Match(p1_name, p2_name)
-        print(MatchService.ongoing_matches)
         return match_uuid
     
     def match_add_point(match_uuid: UUID, player_num: int) -> None:

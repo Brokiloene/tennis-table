@@ -31,13 +31,12 @@ class MatchDAO(BaseDAO):
                     player2_name=p2_name,
                     score=match.score
                 ))
-        print(matches_dtos)
         return matches_dtos
     
     def fetch_all_filtered_by_name(search_name: str):
         matches_dtos = []
         with BaseDAO.new_session() as session:
-            get_player_id_stmt = select(PlayerModel.id).filter(PlayerModel.name.ilike(search_name))
+            get_player_id_stmt = select(PlayerModel.id).filter(PlayerModel.name.ilike(f"%{search_name}%"))
             player_id = session.execute(get_player_id_stmt).scalar_one_or_none()
             stmt = select(MatchModel).where(
                 or_(MatchModel.player1_id == player_id, 
@@ -52,7 +51,6 @@ class MatchDAO(BaseDAO):
                     player2_name=p2_name,
                     score=match.score
                 ))
-        print(matches_dtos)
         return matches_dtos
             
 

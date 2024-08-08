@@ -6,10 +6,8 @@ from .base import BaseController
 class MatchesHistoryController(BaseController):    
     def do_GET(self, environ, start_response):
         try:
-            query_string = environ.get('QUERY_STRING', '')
             cur_page = int(self.get_query_param(environ, 'page'))
         except KeyError:
-            print(query_string)
             return self.send_error_page(environ, start_response, "400 Bad Request")
         try:
             search_name = self.get_query_param(environ, 'filter_by_player_name')

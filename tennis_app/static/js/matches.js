@@ -21,4 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
         curURL.searchParams.set('page', next_page)
         window.location.href = curURL;
     });
+
+    document.querySelectorAll(".player-name span").forEach(el => {
+        if (el.textContent.length > 16) {
+            el.classList.add("marquee");
+        }
+    });
+
 });

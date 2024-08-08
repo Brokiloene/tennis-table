@@ -97,7 +97,7 @@ def test_fill_db():
             player1_id=6,
             player2_id=13,
             winner_id=6,
-            score="6 2 6 3 6 1"
+            score="6 2 3 6 6 1"
         ),
         CreateMatchDTO(
             uuid='test-match-11',

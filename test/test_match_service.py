@@ -14,7 +14,6 @@ from tennis_app.services import MatchService
 class TestMatch(unittest.TestCase):
     def setUp(self) -> None:
         self.match_uuid = MatchService.create_match("Player1", "Player2")
-        # self.match = Match("Player1", "Player2")
         self.change_score_cnt = 0
         self.lock = threading.Lock()
     
@@ -39,7 +38,6 @@ class TestMatch(unittest.TestCase):
         t2.join()
 
         match = MatchService.ongoing_matches[self.match_uuid]
-        print(match.serialize())
 
         self.assertTrue(match.match_ended)
         self.assertEqual(match.winner, "Player1")

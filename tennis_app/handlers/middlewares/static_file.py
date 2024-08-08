@@ -1,5 +1,6 @@
 import mimetypes
 from pathlib import Path
+from datetime import datetime
 
 from typing import List
 
@@ -38,9 +39,11 @@ class StaticFileMiddleware(BaseMiddleware):
             return self.send_error_page(environ, start_response, "400 Bad Request")
         else:
             data = self.get_file_data(file_path)
+            mod_time = datetime.fromtimestamp(file_path.stat().st_mtime)
             response_headers = [
                 ('Content-Type', mime_type),
-                ('Content-Length', str(file_path.stat().st_size))
+                ('Content-Length', str(file_path.stat().st_size)),
+                ('Last-modified', mod_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
             ]
             start_response('200 OK', response_headers)
             return data  

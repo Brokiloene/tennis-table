@@ -1,50 +1,69 @@
 @import url("base.css");
 
-main form {
+.wrapper {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.new-match-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     
+    aspect-ratio: 3 / 2;
+    
+    height: 90%;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+form {
     height: 100%;
     width: 100%;
 }
 
-.form-group {
+form h1 {
+    height: 20%;
+    width: 100%;
+
+    font-size: 4rem;
+}
+
+form div {
     display: flex;
-    align-items: center;
     justify-content: space-around;
-    
-    box-sizing: border-box;
+    align-items: center;
 
-    height: 100%;
+    height: 25%;
     width: 100%;
-
-    font-size: 3rem;
 }
 
-.player-names {
+form button {
+    height: 100%;
+    width: 40%;
+}
+
+label {
     display: flex;
-    
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-}
+    justify-content: center;
+    align-items: center;
 
-.form-group div {
-    height: 100%;
-    width: 30%;
+    font-size: 2rem;
 }
 
 input {
-    width: 100%;
-    height: 5%;    
-}
+    display: flex;
+    justify-content: center;
 
-main button {
-    width: 30%;
-    height: 10%;
-    margin-bottom: 5%;
+    height: 30%;
+    width: 55%;
+
+    font-size: 2rem;
 }
