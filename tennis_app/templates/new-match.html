@@ -3,10 +3,10 @@
 {% block css_file %}"new-match.css"{% endblock %}
 
 {% block content %}
-
+<script src="new_match.js"></script>
 <div class="wrapper">
     <div class="table new-match-table">
-        <form method="post" name="player-names" class="player-names" action="/new-match">
+        <form onsubmit="return matchFields()" method="post" name="player-names" class="player-names" action="/new-match">
             <h1 class="table-text-regular centered-flex">ENTER PLAYER NAMES</h1>
             <div class="player-input-wrapper">
                 <label for="name-p1" class="table-text-regular">PLAYER 1's NAME:</label>
