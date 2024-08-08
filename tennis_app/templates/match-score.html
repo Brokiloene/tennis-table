@@ -51,22 +51,22 @@
             <h2 class="table-text-regular">MATCH STATUS</h2>
             <span class="table-text-screen table-el table-text match-status">{{match_status}}</span>
             <form action="/">
-                <button class="table-text-regular">MAIN MENU</button>
+                <button class="table-text-regular table-btn">MAIN MENU</button>
             </form>
             <form action="/new-match">
-                <button class="table-text-regular">NEW MATCH</button>
+                <button class="table-text-regular table-btn">NEW MATCH</button>
             </form>
             <form action="/matches">
                 <input type="hidden" name="page" value="1">
-                <button class="table-text-regular">ALL MATCHES</button>
+                <button class="table-text-regular table-btn">ALL MATCHES</button>
             </form>
         </div>
     </aside> 
 </div>
 <form class="change-score-form" method="post" name="change-score">
     <div class="add-point-btns-wrapper">
-        <button class="table-text-regular" type="submit" name="p1-scores" value="p1-scores">Add point</button>
-        <button class="table-text-regular" type="submit" name="p2-scores" value="p2-scores">Add point</button>
+        <button class="table-text-regular table-btn" type="submit" name="p1-scores" value="p1-scores">Add point</button>
+        <button class="table-text-regular table-btn" type="submit" name="p2-scores" value="p2-scores">Add point</button>
     </div>
 </form>
 {% endblock %}
