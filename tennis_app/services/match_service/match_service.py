@@ -24,6 +24,9 @@ class MatchService:
         return match_uuid
     
     def match_add_point(match_uuid: UUID, player_num: int) -> None:
+        """
+        :raises: MatchNotFoundError
+        """
         with MatchService.lock:
             try:
                 MatchService.ongoing_matches[match_uuid].add_game_point(player_num)
@@ -57,16 +60,11 @@ class MatchService:
 
             MatchDAO.insert_one(dto)
 
-        need_to_clear_cache = False
-        with MatchService.lock:
             if match_uuid not in MatchService.ended_matches_uuid:
                 MatchService.ended_matches_uuid.append(match_uuid)
             if len(MatchService.ended_matches_uuid) >= 10:
-                need_to_clear_cache = True
+                MatchService._clear_ended_matches_from_cache() # untested
         
-        if need_to_clear_cache:
-            MatchService._clear_ended_matches_from_cache() # untested
-
 
     def _clear_ended_matches_from_cache():
         with MatchService.lock:

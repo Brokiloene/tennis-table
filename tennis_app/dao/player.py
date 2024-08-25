@@ -20,6 +20,9 @@ class PlayerDAO(BaseDAO):
         return player.id
 
     def select_one_by_name(name: str) -> ReadPlayerDTO:
+        """
+        :raises: PlayerNotFoundError
+        """
         with BaseDAO.new_session() as session:
             stmt = select(PlayerModel).filter_by(name=name)
             player = session.execute(stmt).scalar()
