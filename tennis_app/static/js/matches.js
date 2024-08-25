@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelectorAll(".player-name span").forEach(el => {
-        if (el.textContent.length > 16) {
+        if (el.textContent.length > 14) {
             el.classList.add("marquee");
         }
     });

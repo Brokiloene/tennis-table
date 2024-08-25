@@ -2,8 +2,6 @@ import mimetypes
 from pathlib import Path
 from datetime import datetime
 
-from typing import List
-
 from .base import BaseMiddleware
 
 
@@ -25,11 +23,8 @@ class StaticFileMiddleware(BaseMiddleware):
         else:
             return Path()
     
-    def get_file_data(self, path: Path) -> List[bytes]:
-         with open(path, 'rb') as file:
-            return [file.read()]
-
     def __call__(self, environ, start_response):
+        print(environ)
         path = environ.get('PATH_INFO', '').lstrip('/')
         file_path = self.find_static_file(path)
         mime_type = self.get_content_type(path)
@@ -38,13 +33,14 @@ class StaticFileMiddleware(BaseMiddleware):
         elif mime_type is None:
             return self.send_error_page(environ, start_response, "400 Bad Request")
         else:
-            data = self.get_file_data(file_path)
-            mod_time = datetime.fromtimestamp(file_path.stat().st_mtime)
+            mod_time = datetime.fromtimestamp(file_path.stat().st_mtime) \
+                               .strftime('%a, %d %b %Y %H:%M:%S GMT')
+            file_size = file_path.stat().st_size
             response_headers = [
                 ('Content-Type', mime_type),
-                ('Content-Length', str(file_path.stat().st_size)),
-                ('Last-modified', mod_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
+                ('Content-Length', str(file_size)),
+                ('Last-modified', mod_time)
             ]
             start_response('200 OK', response_headers)
-            return data  
-        
+            f = open(file_path, 'rb')
+            return environ['wsgi.file_wrapper'](f, file_size)

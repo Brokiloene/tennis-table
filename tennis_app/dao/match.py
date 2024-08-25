@@ -53,7 +53,3 @@ class MatchDAO(BaseDAO):
                         score=match.score
                     ))
         return matches_dtos
-            
-
-            
-                
