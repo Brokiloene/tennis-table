@@ -1,12 +1,4 @@
 
-def recreate_db():
-    from sqlalchemy_utils import database_exists, create_database, drop_database
-    from tennis_app.models import engine
-
-    if database_exists(engine.url):
-        drop_database(engine.url)
-    create_database(engine.url)
-    
 
 def test_fill_db():
     from tennis_app.dto import CreateMatchDTO
@@ -108,16 +100,11 @@ def test_fill_db():
         )
     ]
 
+    print("INSERTING:")
     for player in players:
-        PlayerDAO.insert_one(name=player)
+        print(PlayerDAO.insert_one(name=player))
     for match_dto in matches:
-        MatchDAO.insert_one(dto=match_dto)
+        print(MatchDAO.insert_one(dto=match_dto))
 
 def start():
-    recreate_db()
-
-    import subprocess
-    subprocess.run("alembic revision --autogenerate -m 'Create database'", shell=True)
-    subprocess.run("alembic upgrade head", shell=True)
-
     test_fill_db()
