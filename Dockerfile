@@ -5,5 +5,5 @@ COPY . .
 
 RUN pip install poetry &&\
     poetry install
-RUN chmod +x ./commands.sh
-ENTRYPOINT ["./commands.sh"]
+RUN chmod +x ./startup_commands.sh
+ENTRYPOINT ["./startup_commands.sh"]
