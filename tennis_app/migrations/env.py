@@ -18,14 +18,14 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from tennis_app.models import BaseModel
+from tennis_app.src.models import BaseModel
 target_metadata = BaseModel.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-from tennis_app.config.settings import DB_URL
+from tennis_app.src.config.settings import DB_URL
 config.set_main_option("sqlalchemy.url", DB_URL)
 
 def run_migrations_offline() -> None:
