@@ -2,7 +2,7 @@ import logging
 import sys
 
 from tennis_app.src.shared.core import BaseMiddleware
-from tennis_app.src.views import htmlView
+from tennis_app.src.shared.http_status import HttpStatus
 
 
 logging.basicConfig(
@@ -29,4 +29,4 @@ class LoggingMiddleware(BaseMiddleware):
 
         except Exception as e:
             self.logger.exception(e)
-            self.send_error_response(environ, log_start_response, "500 Internal Server Error", htmlView)
+            self.send_error(start_response, HttpStatus.INTERNAL_ERROR)

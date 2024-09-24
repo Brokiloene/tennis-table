@@ -1,10 +1,11 @@
 from urllib.parse import parse_qs
 
+import tennis_app.src.shared.http_status as httpStatus
 from .handler import BaseHandler
 
 class BaseController(BaseHandler):    
     def __init__(self) -> None:
-        self.response_headers = [
+        self.headers = [
             ('Content-type', 'text/html')
             ]
 
@@ -16,15 +17,11 @@ class BaseController(BaseHandler):
             case 'POST':
                 return self.do_POST(environ, start_response)
             case None:
-                return self.send_response(
-                    start_response, 
-                    self.status.BAD_REQUEST,
-                    self.response_headers,
-                    view,
-                    {"error_message": self.status.BAD_REQUEST}
+                return self.send_error(
+                    start_response,
+                    httpStatus.BAD_REQUEST,
+                    self.headers
                 )
-                # return self.send_error_response(environ, start_response, '400 Bad Request', view)
-    
     def do_GET(self, environ, start_response):
         pass
 
@@ -41,17 +38,10 @@ class BaseController(BaseHandler):
         res = parse_qs(query)[param][0]
         return res
 
-
     def redirect_to(self, location: str, start_response):
-        status = '303 See other'
-        self.response_headers.append(('Location', location))
-        res = 'Redirecting...'
-        self.response_headers.append(
-            ('Content-Length', str(len(res)))
+        return self.send_response(
+            start_response,
+            httpStatus.SEE_OTHER,
+            self.headers + ('Location', location),
+            "Redirecting..."
         )
-        start_response(status, self.response_headers)
-        return [bytes(res, 'utf-8')]
-
-    def __iter__(self):
-        pass
-    

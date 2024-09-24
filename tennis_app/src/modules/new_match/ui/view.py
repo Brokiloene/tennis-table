@@ -1,4 +1,4 @@
-from tennis_app.src.shared.view.html_view import HtmlView
+from tennis_app.src.shared.core.html_view import HtmlView
 
 
 class NewMatchView(HtmlView):

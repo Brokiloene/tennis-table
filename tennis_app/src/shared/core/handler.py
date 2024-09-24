@@ -1,46 +1,18 @@
-from .response_status import Status
+from tennis_app.src.shared.http_status import HttpStatus
+from tennis_app.src.shared.view.error_view import ErrorView
 
 class BaseHandler:
-    def send_error_response(self, start_response, status, headers, view):
-        # response_headers = [('Content-type', 'text/html')]
-        start_response(status, headers)
-        res = view("error-page", {"error_message": status})
-        return [bytes(res, 'utf-8')]
-        
-    def send_response(self, start_response):
-        status = "200 OK"
-        self.response_headers.append(
-            ('Content-Length', str(len(res)))
+    def send_response(self, start_response, headers, data):
+        headers.append(
+            ('Content-Length', str(len(data)))
         )
-        start_response(status, self.response_headers)
-        return [bytes(res, 'utf-8')]
+        start_response(HttpStatus.OK, headers)
+        return [bytes(data, 'utf-8')]
 
-    #     # yield page
-    
-    # def get_tuple_send_args(
-    #         self, 
-    #         environ, 
-    #         start_response, 
-    #         msg, 
-    #         headers,
-    #         view, 
-    #         **view_data):
-    #     return (
-    #         environ,
-    #         start_response,
-    #         msg,
-    #         headers,
-    #         view,
-    #         view_data
-    #     )
-
-    status = Status()
-
-
-    # def send_response(self, start_response, resp_status, headers, view, **view_data):
-    #     headers.append(
-    #         ('Content-Length', str(len(res)))
-    #     )
-    #     start_response(resp_status, headers)
-    #     res = view(**view_data)
-    #     return [bytes[res, 'utf-8']]
+    def send_error(self, start_response, status, headers):
+        return self.send_response(
+            start_response,
+            status,
+            headers,
+            ErrorView({"error_message": status})    
+        )

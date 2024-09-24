@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 
 from tennis_app.src.shared.core import BaseMiddleware
-from tennis_app.src.views import htmlView
+from tennis_app.src.shared.http_status import HttpStatus
 
 
 class StaticFileMiddleware(BaseMiddleware):
@@ -49,17 +49,6 @@ class StaticFileMiddleware(BaseMiddleware):
         if not file_path.is_file():
             return self.app(environ, start_response)
         elif mime_type is None:
-            return self.send_error_response(environ, start_response, "400 Bad Request", htmlView)
+            return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
         else:
-            # mod_time = datetime.fromtimestamp(file_path.stat().st_mtime) \
-            #                    .strftime('%a, %d %b %Y %H:%M:%S GMT')
-            # file_size = file_path.stat().st_size
-            # response_headers = [
-            #     ('Content-Type', mime_type),
-            #     ('Content-Length', str(file_size)),
-            #     ('Last-modified', mod_time)
-            # ]
-            # start_response('200 OK', response_headers)
-            # f = open(file_path, 'rb')
-            # return environ['wsgi.file_wrapper'](f, file_size)
             return self.send_file(environ, start_response, file_path, mime_type)

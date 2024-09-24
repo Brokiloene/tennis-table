@@ -1,8 +1,7 @@
 from tennis_app.src.shared.core import BaseController
-from tennis_app.src.views import htmlView
-
+from .ui.view import MainPageView
 
 class IndexController(BaseController):
     def do_GET(self, environ, start_response):
-        res = htmlView("index", dict())
-        return self.send_response(res, start_response)
+        data = MainPageView({})
+        return self.send_response(start_response, self.headers, data)

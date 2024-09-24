@@ -1,8 +1,9 @@
 from math import ceil
 
+from tennis_app.src.shared.http_status import HttpStatus
 from tennis_app.src.shared.core import BaseController
 from .services.matches_history import MatchesHistoryService
-from tennis_app.src.views import htmlView
+from .ui.view import MatchHistoryView
 
 
 class MatchesHistoryController(BaseController):    
@@ -10,12 +11,13 @@ class MatchesHistoryController(BaseController):
         try:
             cur_page = int(self.get_query_param(environ, 'page'))
         except KeyError:
-            return self.send_error_response(environ, start_response, "400 Bad Request", htmlView)
+            return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
         try:
             search_name = self.get_query_param(environ, 'filter_by_player_name')
         except KeyError:
             search_name = None
         
+        # Move this to SearchMatchByNameService
         if search_name is None:
             all_matches = MatchesHistoryService.get_all_matches()
         else:
@@ -29,11 +31,12 @@ class MatchesHistoryController(BaseController):
             cur_page = max_page
 
         if len(all_matches)+1 < cur_page*2 and len(all_matches) != 0:
-            return self.send_error_response(environ, start_response, "400 Bad Request")
+            return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
 
-        res = htmlView("matches", self.view.get_matches_template_data(
+        data = MatchHistoryView.get_matches_template_data(
             all_matches=all_matches,
             cur_page=cur_page,
             max_page=max_page
-            ))
-        return self.send_response(res, start_response)
+            )
+        
+        return self.send_response(start_response, self.headers, data)
