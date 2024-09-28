@@ -3,9 +3,8 @@ from tennis_app.src.middlewares import (
     StaticFileMiddleware, 
     LoggingMiddleware
 )
-from tennis_app.src.views import RendererHTML
 from tennis_app.src.config.settings import STATIC_FILES_DIR
 
-app = Dispatcher(view=RendererHTML)
+app = Dispatcher()
 app = StaticFileMiddleware(app, STATIC_FILES_DIR)
 app = LoggingMiddleware(app)

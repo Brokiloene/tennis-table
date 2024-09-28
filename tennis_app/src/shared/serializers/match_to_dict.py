@@ -25,9 +25,9 @@ class MatchToDictSerializer:
         if match_obj.is_tiebreak:
             d["match_status"] = "tiebreak"
         elif match_obj.match_ended:
-            d["match_status"] = "match_obj is over"
+            d["match_status"] = "match is over"
         else:
-            d["match_status"] = "match_obj is ongoing"
+            d["match_status"] = "match is ongoing"
 
         keys = ["set1_p1", "set1_p2", "set2_p1", "set2_p2", "set3_p1", "set3_p2"]
         vals = itertools.chain(*match_obj.sets)

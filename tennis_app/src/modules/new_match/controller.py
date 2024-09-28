@@ -8,7 +8,7 @@ from .ui.view import NewMatchView
 
 class NewMatchController(BaseController):
     def do_GET(self, environ, start_response):
-        data = NewMatchView("new-match", {})
+        data = NewMatchView.render({})
         return self.send_response(start_response, self.headers, data)
     
     def do_POST(self, environ, start_response):
@@ -24,4 +24,5 @@ class NewMatchController(BaseController):
         
         match_uuid: UUID = MemoryStorageDAO.create(player1_name, player2_name)
 
-        return self.redirect_to(f'/match-score?uuid={str(match_uuid)}', start_response)
+        print("CONTROLLER: ", self.headers)
+        return self.redirect_to(f'/match-score?uuid={str(match_uuid)}', start_response, self.headers)

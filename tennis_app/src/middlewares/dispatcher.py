@@ -11,8 +11,7 @@ from tennis_app.src.modules import (
 )
 
 class Dispatcher(BaseMiddleware):
-    def __init__(self, view) -> None:
-        self.view = view
+    def __init__(self) -> None:
         self.routes = {
             "/": IndexController(),
             "/new-match": NewMatchController(),
@@ -26,4 +25,4 @@ class Dispatcher(BaseMiddleware):
         if controller is None:
             return self.send_error(start_response, HttpStatus.NOT_FOUND, self.headers)
         else:
-            controller(environ, start_response, self.view)
+            return controller(environ, start_response)

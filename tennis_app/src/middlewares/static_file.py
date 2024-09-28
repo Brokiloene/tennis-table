@@ -49,6 +49,7 @@ class StaticFileMiddleware(BaseMiddleware):
         if not file_path.is_file():
             return self.app(environ, start_response)
         elif mime_type is None:
+            # CHANGE
             return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
         else:
             return self.send_file(environ, start_response, file_path, mime_type)

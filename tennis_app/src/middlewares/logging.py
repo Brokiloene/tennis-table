@@ -26,7 +26,10 @@ class LoggingMiddleware(BaseMiddleware):
         
         try:
             return self.app(environ, log_start_response)
-
         except Exception as e:
             self.logger.exception(e)
-            self.send_error(start_response, HttpStatus.INTERNAL_ERROR)
+            self.send_error(
+                start_response, 
+                HttpStatus.INTERNAL_ERROR, 
+                [('Content-type', 'text/html')]
+            )

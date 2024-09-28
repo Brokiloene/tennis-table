@@ -1,8 +1,8 @@
 from math import ceil
 
-from tennis_app.src.shared.http_status import HttpStatus
 from tennis_app.src.shared.core import BaseController
 from .services.matches_history import MatchesHistoryService
+from tennis_app.src.shared.http_status import HttpStatus
 from .ui.view import MatchHistoryView
 
 
@@ -33,10 +33,11 @@ class MatchesHistoryController(BaseController):
         if len(all_matches)+1 < cur_page*2 and len(all_matches) != 0:
             return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
 
-        data = MatchHistoryView.get_matches_template_data(
+        match_data = MatchHistoryView.get_matches_template_data(
             all_matches=all_matches,
             cur_page=cur_page,
             max_page=max_page
             )
+        data = MatchHistoryView.render(data)
         
         return self.send_response(start_response, self.headers, data)

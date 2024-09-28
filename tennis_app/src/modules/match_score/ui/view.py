@@ -1,5 +1,5 @@
-from tennis_app.src.shared.view.html_view import HtmlView
+from tennis_app.src.shared.core.html_view import HtmlView
 
 
 class MainScoreView(HtmlView):
-    template = "match-score.html"
+    template_file = "match-score.html"

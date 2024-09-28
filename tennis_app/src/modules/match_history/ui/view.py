@@ -4,7 +4,7 @@ from tennis_app.src.shared.dto import ReadMatchDTO, ViewMatchDTO
 
 
 class MatchHistoryView(HtmlView):
-    template = "matches.html"
+    template_file = "matches.html"
 
     @staticmethod
     def get_matches_template_data(

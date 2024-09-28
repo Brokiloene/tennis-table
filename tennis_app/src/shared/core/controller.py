@@ -1,6 +1,6 @@
 from urllib.parse import parse_qs
 
-import tennis_app.src.shared.http_status as httpStatus
+from tennis_app.src.shared.http_status import HttpStatus
 from .handler import BaseHandler
 
 class BaseController(BaseHandler):    
@@ -9,7 +9,7 @@ class BaseController(BaseHandler):
             ('Content-type', 'text/html')
             ]
 
-    def __call__(self, environ, start_response, view):
+    def __call__(self, environ, start_response):
         method = environ.get('REQUEST_METHOD', None)
         match method:
             case 'GET':
@@ -19,7 +19,7 @@ class BaseController(BaseHandler):
             case None:
                 return self.send_error(
                     start_response,
-                    httpStatus.BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST,
                     self.headers
                 )
     def do_GET(self, environ, start_response):
@@ -38,10 +38,10 @@ class BaseController(BaseHandler):
         res = parse_qs(query)[param][0]
         return res
 
-    def redirect_to(self, location: str, start_response):
+    def redirect_to(self, location: str, start_response, headers):
         return self.send_response(
             start_response,
-            httpStatus.SEE_OTHER,
-            self.headers + ('Location', location),
-            "Redirecting..."
+            headers + [('Location', location)],
+            "Redirecting...",
+            HttpStatus.SEE_OTHER
         )

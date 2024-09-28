@@ -35,7 +35,7 @@ class MatchScoreController(BaseController):
         except MatchNotFoundError:
             return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
         
-        data = MainScoreView(view_data)
+        data = MainScoreView.render(view_data)
         return self.send_response(start_response, self.headers, data)
   
     
@@ -51,5 +51,5 @@ class MatchScoreController(BaseController):
             return self.send_error(start_response, HttpStatus.BAD_REQUEST, self.headers)
         
         view_data = MatchToDictSerializer.serialize(match_obj)
-        data = MainScoreView(view_data)
+        data = MainScoreView.render(view_data)
         return self.send_response(start_response, self.headers, data)

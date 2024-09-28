@@ -7,10 +7,9 @@ class HtmlView:
         loader=jinja2.FileSystemLoader(searchpath=TEMPLATES_DIR),
         autoescape=jinja2.select_autoescape()
     )
-    template = ""
+    template_file = ""
 
     @classmethod
-    def __call__(cls, data: dict):
-        template_file = cls.templates[template]
-        template = cls.environment.get_template(template_file)
+    def render(cls, data: dict):
+        template = cls.environment.get_template(cls.template_file)
         return template.render(**data)

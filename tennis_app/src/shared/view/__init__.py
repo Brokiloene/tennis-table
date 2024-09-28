@@ -1,1 +1,1 @@
-from .html_view import htmlView
+from .error_view import ErrorView
