@@ -65,8 +65,13 @@
 </div>
 <form class="change-score-form" method="post" name="change-score">
     <div class="add-point-btns-wrapper">
-        <button class="table-text-regular table-btn" type="submit" name="p1-scores" value="p1-scores">Add point</button>
-        <button class="table-text-regular table-btn" type="submit" name="p2-scores" value="p2-scores">Add point</button>
+        {% if match_status == "match is over" %}
+            <button class="table-text-regular table-btn disabled" type="button" name="player-scores" value="p1">Add point</button>
+            <button class="table-text-regular table-btn disabled" type="button" name="player-scores" value="p2">Add point</button>
+        {% else %}        
+            <button class="table-text-regular table-btn" type="submit" name="player-scores" value="p1">Add point</button>
+            <button class="table-text-regular table-btn" type="submit" name="player-scores" value="p2">Add point</button>
+        {% endif %}
     </div>
 </form>
 {% endblock %}

@@ -1,6 +1,6 @@
 from typing import List
 
-from sqlalchemy import select, or_
+from sqlalchemy import select, or_, exists
 
 from tennis_app.src.shared.dto import CreateMatchDTO, ReadMatchDTO
 from tennis_app.src.shared.core import BaseDAO

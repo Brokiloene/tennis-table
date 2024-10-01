@@ -38,6 +38,6 @@ class MatchesHistoryController(BaseController):
             cur_page=cur_page,
             max_page=max_page
             )
-        data = MatchHistoryView.render(data)
+        data = MatchHistoryView.render(match_data)
         
         return self.send_response(start_response, self.headers, data)

@@ -13,12 +13,9 @@ class SaveMatchService(BaseService):
         """
         match_obj = MemoryStorageDAO.read(match_uuid)
         match_result = MatchToDictSerializer.get_only_result_data(match_obj)
-        match_result = match_obj.get_result_data()
         p1_id = PlayerDAO.insert_one(match_obj.p1_name)
         p2_id = PlayerDAO.insert_one(match_obj.p2_name)
 
-        # p1_id = PlayerDAO.select_one_by_name(p1_name).p_id
-        # p2_id = PlayerDAO.select_one_by_name(p2_name).p_id
         if match_obj.p1_name == match_obj.winner:
             winner_id = p1_id
         else:
@@ -36,4 +33,3 @@ class SaveMatchService(BaseService):
             MemoryStorageDAO.delete(match_uuid)
         except KeyError:
             raise MatchNotFoundError
-

@@ -22,6 +22,7 @@ class Dispatcher(BaseMiddleware):
     def __call__(self, environ, start_response) -> Any:
         url = environ.get('PATH_INFO', '')
         controller = self.routes.get(url, None)
+        print(controller)
         if controller is None:
             return self.send_error(start_response, HttpStatus.NOT_FOUND, self.headers)
         else:
