@@ -1,10 +1,9 @@
 services:
   app:
-    cpus: 0.3
     build: .
     container_name: python_app
     ports:
-      - 2000:2000
+      - 1280:1280
     env_file:
       - .env
     depends_on:
@@ -16,7 +15,6 @@ services:
 
   mysql_db:
     image: mysql:latest
-    cpus: 0.3
     container_name: mysql_db
     volumes:
       - mysql-volume:/var/lib/mysql
@@ -32,7 +30,7 @@ services:
     restart: on-failure
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 5s
+      timeout: 3s
       retries: 10
       start_period: 5s
 networks:
