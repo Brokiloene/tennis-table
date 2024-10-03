@@ -20,7 +20,7 @@ class BaseController(BaseHandler):
                 return self.send_error(
                     start_response,
                     HttpStatus.BAD_REQUEST,
-                    self.headers
+                        
                 )
     def do_GET(self, environ, start_response):
         pass
@@ -36,7 +36,7 @@ class BaseController(BaseHandler):
     def get_query_param(self, environ, param: str) -> str:
         query = environ['QUERY_STRING']
         res = parse_qs(query)[param][0]
-        return res
+        return str(res)
 
     def redirect_to(self, location: str, start_response, headers):
         return self.send_response(

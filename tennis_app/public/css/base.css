@@ -126,3 +126,10 @@ button:hover {
 button:active {
     box-shadow: 0.5rem 0.5rem grey;
 }
+
+button:disabled {
+    background-color: grey;
+    box-shadow: 0.5rem 0.5rem grey;
+
+    pointer-events: none;
+}
