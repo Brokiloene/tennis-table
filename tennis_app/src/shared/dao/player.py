@@ -27,7 +27,7 @@ class PlayerDAO(BaseDAO):
             stmt = select(PlayerModel).filter_by(name=name)
             player = session.execute(stmt).scalar()
         if player is None:
-            raise PlayerNotFoundError("error info here")
+            raise PlayerNotFoundError(f"Player {name} not found")
         else:
             return ReadPlayerDTO(p_id=player.id, name=player.name)
         
