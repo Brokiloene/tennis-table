@@ -1,5 +1,3 @@
-import itertools
-
 from enum import IntEnum
 
 class GameScore(IntEnum):
@@ -141,39 +139,3 @@ class Match:
                     return "AD"
                 case _: # error
                     return "ER"
-
-
-    # def serialize(self) -> dict:
-    #     p1_game_score: str = self.game_score_to_str(self.p1_game_score)
-    #     p2_game_score: str = self.game_score_to_str(self.p2_game_score)
-    #     if self.match_ended:
-    #         cur_set_score: list = self.sets[2]
-    #     else:
-    #         cur_set_score: list = self.sets[self.cur_set]
-
-    #     d = {
-    #         "name_p1": self.p1_name,
-    #         "name_p2": self.p2_name,
-    #         "p1_digit_1": p1_game_score[0],
-    #         "p1_digit_2": p1_game_score[1],
-    #         "p2_digit_1": p2_game_score[0],
-    #         "p2_digit_2": p2_game_score[1],
-    #         "cur_set_p1": cur_set_score[0],
-    #         "cur_set_p2": cur_set_score[1],
-    #     }
-
-    #     if self.is_tiebreak:
-    #         d["match_status"] = "tiebreak"
-    #     elif self.match_ended:
-    #         d["match_status"] = "match is over"
-    #     else:
-    #         d["match_status"] = "match is ongoing"
-
-    #     keys = ["set1_p1", "set1_p2", "set2_p1", "set2_p2", "set3_p1", "set3_p2"]
-    #     vals = itertools.chain(*self.sets)
-    #     d |= {k:v for k, v in zip(keys, vals)}
-    #     return d
-    
-    # def get_result_data(self):
-    #     sets_flatten = itertools.chain(*self.sets)
-    #     return ' '.join(map(str, sets_flatten)) 
