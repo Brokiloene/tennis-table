@@ -51,7 +51,6 @@ class MatchDAO(BaseDAO):
                 order by m.id
                 """
             )
-            print("--------------------__> ", search_query)
             matches_data = session.execute(stmt, {"search_query": f"%{search_query}%"})
         matches_dtos = []
         for score, name1, name2 in matches_data:

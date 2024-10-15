@@ -20,8 +20,6 @@ class MatchScoreController(BaseController):
             form_data = self.parse_post_form(environ)
         except ValueError:
             return self.send_error(start_response, HttpStatus.LENGTH_REQUIRED, self.headers)
-        # print(form_data)
-        # Move this to some service (UpdateMatchService)
         try:
             update_info = form_data["player-scores"][0]
         except KeyError:

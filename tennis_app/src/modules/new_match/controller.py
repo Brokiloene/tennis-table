@@ -24,5 +24,4 @@ class NewMatchController(BaseController):
         
         match_uuid: UUID = MemoryStorageDAO.create(player1_name, player2_name)
 
-        print("CONTROLLER: ", self.headers)
         return self.redirect_to(f'/match-score?uuid={str(match_uuid)}', start_response, self.headers)
