@@ -11,8 +11,11 @@ class PlayerDAO(BaseDAO):
     def insert_one(name: str) -> int:
         with BaseDAO.new_session() as session:
             player = PlayerModel(name=name)
-            session.add(player)
-            session.commit
+            stmt = select(PlayerModel.id).filter_by(name=name)
+            player.id = session.execute(stmt).scalar_one_or_none()
+            if player.id is None:
+                session.add(player)
+            session.commit()
         return player.id
 
     def select_one_by_name(name: str) -> ReadPlayerDTO:

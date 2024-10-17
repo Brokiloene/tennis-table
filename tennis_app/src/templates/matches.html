@@ -9,18 +9,18 @@
     <div class="table matches-table">
         <h1 class="table-text-regular">MATCHES HISTORY</h1>
 
-        {% if matches|length > 0 and cur_page*2-2 < matches | length %}
-            {{ macros.get_match_record(matches[cur_page*2-2]) }}
+        {% if matches|length > 0 %}
+            {{ macros.get_match_record(matches[0]) }}
         {% else %}
-            {{ macros.get_match_record(empty_match_res) }}
+            {{ macros.get_match_record(empty_match) }}
         {% endif %}
 
         <div class="delimeter"></div>
 
-        {% if matches|length > 0 and cur_page*2-1 < matches | length %}
-            {{ macros.get_match_record(matches[cur_page*2-1]) }}
+        {% if matches|length > 1 %}
+            {{ macros.get_match_record(matches[1]) }}
         {% else %}
-            {{ macros.get_match_record(empty_match_res) }}
+            {{ macros.get_match_record(empty_match) }}
         {% endif %}
 
             <div class="matches-nav">

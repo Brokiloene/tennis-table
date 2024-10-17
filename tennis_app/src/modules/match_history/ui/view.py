@@ -5,6 +5,7 @@ from tennis_app.src.shared.dto import ReadMatchDTO, ViewMatchDTO
 
 class MatchHistoryView(HtmlView):
     template_file = "matches.html"
+    MATCHES_ON_ONE_PAGE = 2
 
     @staticmethod
     def get_matches_template_data(
@@ -36,14 +37,14 @@ class MatchHistoryView(HtmlView):
         if max_page < 10:
             max_page_str = '0' + max_page_str
 
-        d['cur_page'] = cur_page
+        # d['cur_page'] = cur_page
         d['cur_page_d1'] = cur_page_str[0]
         d['cur_page_d2'] = cur_page_str[1]
 
         d['max_page_d1'] = max_page_str[0]
         d['max_page_d2'] = max_page_str[1]
 
-        empty_match_res = ViewMatchDTO(
+        empty_match = ViewMatchDTO(
                             p1_name='NO DATA',
                             p2_name='NO DATA',
                             p1_s1='0',
@@ -53,7 +54,7 @@ class MatchHistoryView(HtmlView):
                             p2_s2='0',
                             p2_s3='0'
                         )
-        d['empty_match_res'] = empty_match_res
+        d['empty_match'] = empty_match
         
         matches = [get_match_view_dto(dto) for dto in all_matches]
         d['matches'] = matches

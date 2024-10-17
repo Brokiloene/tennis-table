@@ -13,6 +13,7 @@ class SaveMatchService(BaseService):
         """
         match_obj = MemoryStorageDAO.read(match_uuid)
         match_result = MatchToDictSerializer.get_only_result_data(match_obj)
+
         p1_id = PlayerDAO.insert_one(match_obj.p1_name)
         p2_id = PlayerDAO.insert_one(match_obj.p2_name)
 
