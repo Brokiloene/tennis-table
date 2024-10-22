@@ -1,7 +1,7 @@
 from tennis_app.src.middlewares import (
-    Dispatcher, 
-    StaticFileMiddleware, 
-    LoggingMiddleware
+    Dispatcher,
+    StaticFileMiddleware,
+    LoggingMiddleware,
 )
 from tennis_app.src.config.settings import STATIC_FILES_DIR
 

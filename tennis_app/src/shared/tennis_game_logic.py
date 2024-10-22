@@ -1,5 +1,6 @@
 from enum import IntEnum
 
+
 class GameScore(IntEnum):
     LOVE = 0
     FIFTEEN = 1
@@ -13,20 +14,16 @@ class Match:
     def __init__(self, p1_name: str, p2_name: str) -> None:
         self.p1_name = p1_name
         self.p2_name = p2_name
-        self.sets = [
-            [0,0],
-            [0,0],
-            [0,0]
-        ]
+        self.sets = [[0, 0], [0, 0], [0, 0]]
         self.cur_set = 0
-        self.p1_game_score: GameScore|int = GameScore.LOVE
-        self.p2_game_score: GameScore|int = GameScore.LOVE
+        self.p1_game_score: GameScore | int = GameScore.LOVE
+        self.p2_game_score: GameScore | int = GameScore.LOVE
         self.p1_sets_won = 0
         self.p2_sets_won = 0
 
         self.is_tiebreak = False
         self.match_ended = False
-        self.winner: str|None = None 
+        self.winner: str | None = None
 
     def add_game_point(self, player_num: int) -> None:
         # there are player 1 and player 2
@@ -39,16 +36,16 @@ class Match:
             new_score = GameScore(cur_score + 1)
         setattr(self, f"p{player_num}_game_score", new_score)
         if (
-            isinstance(self.p1_game_score, GameScore) and
-            isinstance(self.p2_game_score, GameScore) and
-            self.p1_game_score == GameScore.GAME_OR_AD and
-            self.p2_game_score == GameScore.GAME_OR_AD
+            isinstance(self.p1_game_score, GameScore)
+            and isinstance(self.p2_game_score, GameScore)
+            and self.p1_game_score == GameScore.GAME_OR_AD
+            and self.p2_game_score == GameScore.GAME_OR_AD
         ):
             self.p1_game_score = GameScore.FOURTY
             self.p2_game_score = GameScore.FOURTY
 
         if self.is_game_end():
-            self.sets[self.cur_set][player_num-1] += 1 # [2-1] = [1], [1-1] = [0]
+            self.sets[self.cur_set][player_num - 1] += 1  # [2-1] = [1], [1-1] = [0]
             self.p1_game_score = GameScore.LOVE
             self.p2_game_score = GameScore.LOVE
 
@@ -59,30 +56,29 @@ class Match:
             if self.is_match_end():
                 self.match_ended = True
                 self.set_winner()
-        
+
     def is_game_end(self) -> bool:
         scores = (self.p1_game_score, self.p2_game_score)
 
         if (
-            not self.is_tiebreak and 
-            any([score == GameScore.GAME_OR_AD for score in scores]) and
-            abs(scores[0] - scores[1]) >= 2
+            not self.is_tiebreak
+            and any([score == GameScore.GAME_OR_AD for score in scores])
+            and abs(scores[0] - scores[1]) >= 2
         ):
             return True
-        
+
+        if not self.is_tiebreak and any(
+            [score == GameScore.AD_WIN for score in scores]
+        ):
+            return True
+
         if (
-            not self.is_tiebreak and
-            any([score == GameScore.AD_WIN for score in scores])
+            self.is_tiebreak
+            and any([score >= 7 for score in scores])
+            and abs(scores[0] - scores[1]) >= 2
         ):
             return True
-        
-        if (
-            self.is_tiebreak and
-            any([score >= 7 for score in scores]) and
-            abs(scores[0] - scores[1]) >= 2
-        ):
-            return True
-        
+
         return False
 
     def is_set_end(self) -> bool:
@@ -90,22 +86,20 @@ class Match:
         p2_games_won = self.sets[self.cur_set][1]
 
         if (
-            any([p == 6 for p in (p1_games_won, p2_games_won)]) and
-            abs(p1_games_won - p2_games_won) >= 2
+            any([p == 6 for p in (p1_games_won, p2_games_won)])
+            and abs(p1_games_won - p2_games_won) >= 2
         ):
             return True
 
-        if (
-            any([p == 7 for p in (p1_games_won, p2_games_won)])
-        ):
+        if any([p == 7 for p in (p1_games_won, p2_games_won)]):
             self.is_tiebreak = False
             return True
-        
+
         if p1_games_won == 6 and p2_games_won == 6:
             self.is_tiebreak = True
-        
+
         return False
-    
+
     def is_match_end(self) -> bool:
         if self.p1_sets_won >= 2 or self.p2_sets_won >= 2:
             return True
@@ -117,9 +111,9 @@ class Match:
             self.winner = self.p1_name
         else:
             self.winner = self.p2_name
-    
+
     @staticmethod
-    def game_score_to_str(game_score: GameScore|int):
+    def game_score_to_str(game_score: GameScore | int):
         if not isinstance(game_score, GameScore):
             res = str(game_score)
             if len(res) < 2:
@@ -137,5 +131,5 @@ class Match:
                     return "40"
                 case GameScore.GAME_OR_AD:
                     return "AD"
-                case _: # error
+                case _:  # error
                     return "ER"

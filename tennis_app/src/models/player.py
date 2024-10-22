@@ -3,6 +3,7 @@ from sqlalchemy import String
 
 from .database import BaseModel
 
+
 class PlayerModel(BaseModel):
     __tablename__ = "player"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
