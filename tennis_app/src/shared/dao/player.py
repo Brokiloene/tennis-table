@@ -7,7 +7,6 @@ from tennis_app.src.shared.dto import ReadPlayerDTO
 
 from tennis_app.src.shared.core import BaseDAO
 
-
 class PlayerDAO(BaseDAO):
     def insert_one(name: str) -> int:
         with BaseDAO.new_session() as session:
@@ -30,3 +29,4 @@ class PlayerDAO(BaseDAO):
             raise PlayerNotFoundError(f"Player {name} not found")
         else:
             return ReadPlayerDTO(p_id=player.id, name=player.name)
+        

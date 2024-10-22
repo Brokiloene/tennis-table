@@ -1,15 +1,14 @@
+import sys, os
+testdir = os.path.dirname(__file__)
+srcdir = '..'
+sys.path.insert(0, os.path.abspath(os.path.join(testdir, srcdir)))
+
 import unittest
 import threading
 from typing import List
 
-# from tennis_app.src. import MatchService
-
-import sys
-import os
-
-testdir = os.path.dirname(__file__)
-srcdir = ".."
-sys.path.insert(0, os.path.abspath(os.path.join(testdir, srcdir)))
+from tennis_app.services.match_service.tennis_game_logic import Match
+from tennis_app.services import MatchService
 
 
 class TestMatch(unittest.TestCase):
@@ -17,7 +16,7 @@ class TestMatch(unittest.TestCase):
         self.match_uuid = MatchService.create_match("Player1", "Player2")
         self.change_score_cnt = 0
         self.lock = threading.Lock()
-
+    
     def tearDown(self) -> None:
         pass
 
@@ -28,14 +27,10 @@ class TestMatch(unittest.TestCase):
                 MatchService.match_add_point(match_uuid, player_num)
 
     def test_no_race_on_add_match_point(self):
-        pts_win_order = [1, 1, 1, 1] * 100000
+        pts_win_order = [1,1,1,1]*100000
 
-        t1 = threading.Thread(
-            target=self.set_up_match, args=(self.match_uuid, pts_win_order)
-        )
-        t2 = threading.Thread(
-            target=self.set_up_match, args=(self.match_uuid, pts_win_order)
-        )
+        t1 = threading.Thread(target=self.set_up_match, args=(self.match_uuid, pts_win_order))
+        t2 = threading.Thread(target=self.set_up_match, args=(self.match_uuid, pts_win_order))
         t1.start()
         t2.start()
 
@@ -49,5 +44,5 @@ class TestMatch(unittest.TestCase):
         self.assertEqual(self.change_score_cnt, 800000)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main(verbosity=1)

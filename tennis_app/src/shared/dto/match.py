@@ -2,13 +2,11 @@ from dataclasses import dataclass
 
 from tennis_app.src.shared.core import BaseDTO
 
-
 @dataclass
 class ReadMatchDTO(BaseDTO):
     player1_name: str
     player2_name: str
     score: str
-
 
 @dataclass
 class CreateMatchDTO(BaseDTO):
@@ -18,8 +16,7 @@ class CreateMatchDTO(BaseDTO):
     winner_id: int
     score: str
 
-
-@dataclass
+@dataclass  
 class ViewMatchDTO(BaseDTO):
     p1_name: str
     p2_name: str

@@ -2,11 +2,10 @@ import jinja2
 
 from tennis_app.src.config.settings import TEMPLATES_DIR
 
-
 class HtmlView:
     environment = jinja2.Environment(
         loader=jinja2.FileSystemLoader(searchpath=TEMPLATES_DIR),
-        autoescape=jinja2.select_autoescape(),
+        autoescape=jinja2.select_autoescape()
     )
     template_file = ""
 

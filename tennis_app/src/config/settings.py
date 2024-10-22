@@ -11,5 +11,6 @@ DB_NAME = os.getenv("DB_NAME")
 
 DB_URL = f"{DB_DRIVER}://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-TEMPLATES_DIR = "./tennis_app/src/templates"
-STATIC_FILES_DIR = "./tennis_app/public"
+TEMPLATES_DIR = './tennis_app/src/templates'
+STATIC_FILES_DIR = './tennis_app/public'
+

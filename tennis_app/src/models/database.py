@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
@@ -11,7 +13,6 @@ engine = create_engine(
 )
 
 session_factory = sessionmaker(engine, expire_on_commit=False)
-
 
 class BaseModel(DeclarativeBase):
     pass
