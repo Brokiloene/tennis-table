@@ -1,15 +1,14 @@
-import unittest
-import threading
-from typing import List
-
-# from tennis_app.src. import MatchService
-
-import sys
-import os
+import sys, os
 
 testdir = os.path.dirname(__file__)
 srcdir = ".."
 sys.path.insert(0, os.path.abspath(os.path.join(testdir, srcdir)))
+
+import unittest
+import threading
+from typing import List
+
+from tennis_app.services import MatchService
 
 
 class TestMatch(unittest.TestCase):
