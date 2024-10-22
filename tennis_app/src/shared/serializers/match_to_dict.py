@@ -2,6 +2,7 @@ import itertools
 
 from tennis_app.src.shared.tennis_game_logic import Match
 
+
 class MatchToDictSerializer:
     @staticmethod
     def serialize(match_obj: Match) -> dict:
@@ -32,11 +33,10 @@ class MatchToDictSerializer:
 
         keys = ["set1_p1", "set1_p2", "set2_p1", "set2_p2", "set3_p1", "set3_p2"]
         vals = itertools.chain(*match_obj.sets)
-        d |= {k:v for k, v in zip(keys, vals)}
+        d |= {k: v for k, v in zip(keys, vals)}
         return d
-    
+
     @staticmethod
     def get_only_result_data(match_obj: Match) -> str:
         sets_flatten = itertools.chain(*match_obj.sets)
-        return ' '.join(map(str, sets_flatten)) 
-
+        return " ".join(map(str, sets_flatten))
