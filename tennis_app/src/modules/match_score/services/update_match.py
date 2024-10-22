@@ -6,10 +6,12 @@ from tennis_app.src.shared.core import BaseService
 from tennis_app.src.shared.serializers import MatchToDictSerializer
 from .save_match import SaveMatchService
 
+
 class UpdateMatchService(BaseService):
     """
     :raises: MatchNotFoundError
-    """   
+    """
+
     def execute(match_uuid: UUID, update_info: Dict) -> Dict:
         if update_info == "p1":
             MemoryStorageDAO.update(match_uuid, 1)
