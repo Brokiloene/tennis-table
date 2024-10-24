@@ -2,4 +2,4 @@ from tennis_app.src.shared.core.html_view import HtmlView
 
 
 class ErrorView(HtmlView):
-    template_file = "error-page.html"
+    template_file: str = "error-page.html"

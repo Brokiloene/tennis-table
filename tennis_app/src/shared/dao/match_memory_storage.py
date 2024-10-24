@@ -7,13 +7,15 @@ from tennis_app.src.shared.tennis_game_logic import Match
 
 
 class MemoryStorageDAO:
+    @staticmethod
     def create(player1_name: str, player2_name: str) -> UUID:
         key = get_uuid()
         with MemoryStorage.lock:
             MemoryStorage.data[key] = Match(player1_name, player2_name)
         return key
 
-    def read(match_uuid: UUID):
+    @staticmethod
+    def read(match_uuid: UUID) -> Match:
         """
         :raises: MatchNotFoundError
         """
@@ -24,7 +26,8 @@ class MemoryStorageDAO:
         except KeyError:
             raise MatchNotFoundError
 
-    def update(match_uuid: UUID, player_num: int):
+    @staticmethod
+    def update(match_uuid: UUID, player_num: int) -> None:
         """
         :raises: MatchNotFoundError
         """
@@ -34,7 +37,8 @@ class MemoryStorageDAO:
         except KeyError:
             raise MatchNotFoundError
 
-    def delete(match_uuid: UUID):
+    @staticmethod
+    def delete(match_uuid: UUID) -> None:
         """
         :raises: MatchNotFoundError
         """

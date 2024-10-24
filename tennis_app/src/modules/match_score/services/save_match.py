@@ -5,21 +5,23 @@ from tennis_app.src.shared.dto import CreateMatchDTO
 from tennis_app.src.shared.core import BaseService
 from tennis_app.src.shared.exceptions import MatchNotFoundError
 from tennis_app.src.shared.serializers import MatchToDictSerializer
+from tennis_app.src.shared.tennis_game_logic import Match
 
 
 class SaveMatchService(BaseService):
+    @staticmethod
     def execute(match_uuid: UUID):
         """
         :raises: MatchNotFoundError
         """
-        match_obj = MemoryStorageDAO.read(match_uuid)
-        match_result = MatchToDictSerializer.get_only_result_data(match_obj)
+        match_: Match = MemoryStorageDAO.read(match_uuid)
+        match_result: str = MatchToDictSerializer.get_only_result_data(match_)
 
-        p1_id = PlayerDAO.insert_one(match_obj.p1_name)
-        p2_id = PlayerDAO.insert_one(match_obj.p2_name)
+        p1_id: int = PlayerDAO.insert_one(match_.p1_name)
+        p2_id: int = PlayerDAO.insert_one(match_.p2_name)
 
-        if match_obj.p1_name == match_obj.winner:
-            winner_id = p1_id
+        if match_.p1_name == match_.winner:
+            winner_id: int = p1_id
         else:
             winner_id = p2_id
 

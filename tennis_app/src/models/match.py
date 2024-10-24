@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import ForeignKey, String
 
-from .database import BaseModel
+from tennis_app.src.infrastructure.database import BaseModel
 
 
 class MatchModel(BaseModel):

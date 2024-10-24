@@ -12,26 +12,26 @@ class GameScore(IntEnum):
 
 class Match:
     def __init__(self, p1_name: str, p2_name: str) -> None:
-        self.p1_name = p1_name
-        self.p2_name = p2_name
-        self.sets = [[0, 0], [0, 0], [0, 0]]
-        self.cur_set = 0
+        self.p1_name: str = p1_name
+        self.p2_name: str = p2_name
+        self.sets: list[list[int]] = [[0, 0], [0, 0], [0, 0]]
+        self.cur_set: int = 0
         self.p1_game_score: GameScore | int = GameScore.LOVE
         self.p2_game_score: GameScore | int = GameScore.LOVE
-        self.p1_sets_won = 0
-        self.p2_sets_won = 0
+        self.p1_sets_won: int = 0
+        self.p2_sets_won: int = 0
 
-        self.is_tiebreak = False
-        self.match_ended = False
+        self.is_tiebreak: bool = False
+        self.match_ended: bool = False
         self.winner: str | None = None
 
     def add_game_point(self, player_num: int) -> None:
         # there are player 1 and player 2
         if self.match_ended:
             return
-        cur_score = getattr(self, f"p{player_num}_game_score")
+        cur_score: int = getattr(self, f"p{player_num}_game_score")
         if self.is_tiebreak:
-            new_score = cur_score + 1
+            new_score: int = cur_score + 1
         else:
             new_score = GameScore(cur_score + 1)
         setattr(self, f"p{player_num}_game_score", new_score)

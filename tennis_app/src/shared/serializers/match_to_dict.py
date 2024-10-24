@@ -5,13 +5,13 @@ from tennis_app.src.shared.tennis_game_logic import Match
 
 class MatchToDictSerializer:
     @staticmethod
-    def serialize(match_obj: Match) -> dict:
+    def serialize(match_obj: Match) -> dict[str, str]:
         p1_game_score: str = Match.game_score_to_str(match_obj.p1_game_score)
         p2_game_score: str = Match.game_score_to_str(match_obj.p2_game_score)
         if match_obj.match_ended:
             cur_set_score: list = match_obj.sets[2]
         else:
-            cur_set_score: list = match_obj.sets[match_obj.cur_set]
+            cur_set_score = match_obj.sets[match_obj.cur_set]
 
         d = {
             "name_p1": match_obj.p1_name,

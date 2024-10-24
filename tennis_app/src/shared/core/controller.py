@@ -17,8 +17,7 @@ class BaseController(BaseHandler):
                 return self.do_POST(environ, start_response)
             case None:
                 return self.send_error(
-                    start_response,
-                    HttpStatus.BAD_REQUEST,
+                    start_response, HttpStatus.BAD_REQUEST, self.headers
                 )
 
     def do_GET(self, environ, start_response):
@@ -27,7 +26,7 @@ class BaseController(BaseHandler):
     def do_POST(self, environ, start_response):
         pass
 
-    def parse_post_form(self, environ):
+    def parse_post_form(self, environ) -> dict[str, list[str]]:
         request_body_size = int(environ.get("CONTENT_LENGTH", 0))
         request_body = environ["wsgi.input"].read(request_body_size)
         return parse_qs(request_body.decode("utf-8"))
