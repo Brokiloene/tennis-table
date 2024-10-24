@@ -19,12 +19,10 @@ class Dispatcher(BaseMiddleware):
             "/match-score": MatchScoreController(),
             "/matches": MatchesHistoryController(),
         }
-        print(self.routes)
 
     def __call__(self, environ, start_response) -> Any:
         url: str = environ.get("PATH_INFO", "")
         controller: BaseController | None = self.routes.get(url, None)
-        print(controller)
         if controller is None:
             return self.send_error(
                 start_response, HttpStatus.NOT_FOUND, BaseController.headers
