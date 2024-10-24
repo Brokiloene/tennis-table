@@ -2,7 +2,7 @@ from tennis_app.src.shared.core import BaseController
 from tennis_app.src.shared.exceptions import PaginationError
 from .services.match_history import MatchHistoryService
 from tennis_app.src.shared.http_status import HttpStatus
-from .ui.view import MatchHistoryView
+from .view import MatchHistoryView
 
 
 class MatchesHistoryController(BaseController):

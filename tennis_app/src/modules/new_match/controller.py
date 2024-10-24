@@ -3,7 +3,7 @@ from uuid import UUID
 from tennis_app.src.shared.core import BaseController
 from tennis_app.src.shared.dao import MemoryStorageDAO
 from tennis_app.src.shared.http_status import HttpStatus
-from .ui.view import NewMatchView
+from .view import NewMatchView
 
 
 class NewMatchController(BaseController):

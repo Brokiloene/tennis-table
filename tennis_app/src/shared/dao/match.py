@@ -32,10 +32,10 @@ class MatchDAO(BaseDAO):
             else:
                 stmt = text(
                     """
-                select COUNT(*) 
+                select COUNT(*)
                 from `match` m, player p1, player p2
                 where m.player1_id = p1.id and m.player2_id = p2.id and
-                (p1.name LIKE :search_query or p2.name LIKE :search_query) 
+                (p1.name LIKE :search_query or p2.name LIKE :search_query)
                 """
                 )
                 res = session.execute(
@@ -49,7 +49,7 @@ class MatchDAO(BaseDAO):
         with BaseDAO.new_session() as session:
             stmt = text(
                 """
-                select m.score, p1.name, p2.name 
+                select m.score, p1.name, p2.name
                 from `match` m, player p1, player p2
                 where m.player1_id = p1.id and m.player2_id = p2.id
                 order by m.id
@@ -72,10 +72,10 @@ class MatchDAO(BaseDAO):
         with BaseDAO.new_session() as session:
             stmt = text(
                 """
-                select m.score, p1.name, p2.name 
+                select m.score, p1.name, p2.name
                 from `match` m, player p1, player p2
                 where m.player1_id = p1.id and m.player2_id = p2.id and
-                (p1.name LIKE :search_query or p2.name LIKE :search_query) 
+                (p1.name LIKE :search_query or p2.name LIKE :search_query)
                 order by m.id
                 limit :limit
                 offset :offset

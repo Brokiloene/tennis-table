@@ -1,5 +1,5 @@
 from tennis_app.src.shared.core import BaseController
-from .ui.view import MainPageView
+from .view import MainPageView
 
 
 class IndexController(BaseController):
