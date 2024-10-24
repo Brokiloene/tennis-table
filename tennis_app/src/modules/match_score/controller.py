@@ -6,7 +6,7 @@ from tennis_app.src.shared.dao import MemoryStorageDAO
 from tennis_app.src.shared.serializers import MatchToDictSerializer
 from .services.update_match import UpdateMatchService
 from tennis_app.src.shared.http_status import HttpStatus
-from .ui.view import MainScoreView
+from .view import MainScoreView
 
 
 class MatchScoreController(BaseController):
