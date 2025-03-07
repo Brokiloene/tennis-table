@@ -1,3 +1,4 @@
+import threading
 from uuid import UUID
 
 from tennis_app.src.utils import get_uuid
@@ -5,13 +6,16 @@ from tennis_app.src.shared.exceptions import MatchNotFoundError
 from tennis_app.src.infrastructure.memory_storage import MemoryStorage
 from tennis_app.src.shared.tennis_game_logic import Match
 
-
 class MemoryStorageDAO:
+    _storage = MemoryStorage()
+    _lock = threading.Lock()
+
     @staticmethod
     def create(player1_name: str, player2_name: str) -> UUID:
         key = get_uuid()
-        with MemoryStorage.lock:
-            MemoryStorage.data[key] = Match(player1_name, player2_name)
+        MemoryStorageDAO._storage.put(key, Match(player1_name, player2_name))
+
+        # MemoryStorage.data[key] = Match(player1_name, player2_name)
         return key
 
     @staticmethod
@@ -20,9 +24,10 @@ class MemoryStorageDAO:
         :raises: MatchNotFoundError
         """
         try:
-            with MemoryStorage.lock:
-                res = MemoryStorage.data[match_uuid]
-            return res
+            with MemoryStorageDAO._lock:
+                res = MemoryStorageDAO._storage.get_value(match_uuid)
+                # res = MemoryStorage.data[match_uuid]
+                return res
         except KeyError:
             raise MatchNotFoundError
 
@@ -32,8 +37,10 @@ class MemoryStorageDAO:
         :raises: MatchNotFoundError
         """
         try:
-            with MemoryStorage.lock:
-                MemoryStorage.data[match_uuid].add_game_point(player_num)
+            with MemoryStorageDAO._lock:
+                res: Match = MemoryStorageDAO._storage.get_value(match_uuid)
+                res.add_game_point(player_num)
+                MemoryStorageDAO._storage.update_value(match_uuid, res)
         except KeyError:
             raise MatchNotFoundError
 
@@ -43,6 +50,7 @@ class MemoryStorageDAO:
         :raises: MatchNotFoundError
         """
         try:
-            MemoryStorage.data.pop(match_uuid)
+            with MemoryStorageDAO._lock:
+                MemoryStorageDAO._storage.delete(match_uuid)
         except KeyError:
             raise MatchNotFoundError

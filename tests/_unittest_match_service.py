@@ -8,12 +8,12 @@ import unittest
 import threading
 from typing import List
 
-from tennis_app.services import MatchService
+from tennis_app.src.shared.dao.match_memory_storage import MemoryStorageDAO
 
 
 class TestMatch(unittest.TestCase):
     def setUp(self) -> None:
-        self.match_uuid = MatchService.create_match("Player1", "Player2")
+        self.match_uuid = MemoryStorageDAO.create("Player1", "Player2")
         self.change_score_cnt = 0
         self.lock = threading.Lock()
 
@@ -24,7 +24,7 @@ class TestMatch(unittest.TestCase):
         for player_num in pts_win_order:
             with self.lock:
                 self.change_score_cnt += int(1)
-                MatchService.match_add_point(match_uuid, player_num)
+                MemoryStorageDAO.update(match_uuid, player_num)
 
     def test_no_race_on_add_match_point(self):
         pts_win_order = [1, 1, 1, 1] * 100000
@@ -41,7 +41,7 @@ class TestMatch(unittest.TestCase):
         t1.join()
         t2.join()
 
-        match = MatchService.ongoing_matches[self.match_uuid]
+        match = MemoryStorageDAO.read(self.match_uuid)
 
         self.assertTrue(match.match_ended)
         self.assertEqual(match.winner, "Player1")

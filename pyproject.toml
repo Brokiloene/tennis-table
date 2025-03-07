@@ -3,7 +3,6 @@ name = "tennis-app"
 version = "0.1.0"
 description = ""
 authors = ["Brokiloene <brklvn.minor@gmail.com>"]
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -18,9 +17,16 @@ sqlalchemy-utils = "^0.41.2"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.13.0"
+pytest = "^8.3.5"
+pytest-cov = "^6.0.0"
 
 [tool.mypy]
 exclude = "(tennis_app/Local)"
+
+[tool.pytest.ini_options]
+pythonpath = ["tennis_app/src"]
+testpaths = ["tests"]
+markers = ["slow"]
 
 [build-system]
 requires = ["poetry-core"]
