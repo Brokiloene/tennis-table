@@ -8,7 +8,7 @@
 ## Стек
 |||
 |-|-|
-|Backend|Waitress + Pure WSGI with custom handlers, SQLAlchemy + MySQL, Alembic, Jinja2|
+|Backend|Waitress + Pure WSGI, SQLAlchemy + MySQL, Alembic, Jinja2|
 |Frontend|HTML, CSS, JS|
 
 ## Запуск
