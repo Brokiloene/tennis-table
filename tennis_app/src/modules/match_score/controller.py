@@ -7,7 +7,7 @@ from tennis_app.src.shared.serializers import MatchToDictSerializer
 from tennis_app.src.shared.tennis_game_logic import Match
 from tennis_app.src.shared.http_status import HttpStatus
 from .services.update_match import UpdateMatchService
-from .ui.view import MainScoreView
+from .view import MainScoreView
 
 
 class MatchScoreController(BaseController):
