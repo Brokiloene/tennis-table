@@ -13,7 +13,7 @@ class NewMatchController(BaseController):
 
     def do_POST(self, environ, start_response):
         try:
-            form_data = self.parse_post_form(environ)
+            form_data: dict[str, list[str]] = self.parse_post_form(environ)
         except ValueError:
             return self.send_error(
                 start_response, HttpStatus.LENGTH_REQUIRED, self.headers

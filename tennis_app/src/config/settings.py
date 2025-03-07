@@ -13,3 +13,5 @@ DB_URL = f"{DB_DRIVER}://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 TEMPLATES_DIR = "./tennis_app/src/templates"
 STATIC_FILES_DIR = "./tennis_app/public"
+
+MEMORY_STORAGE_CAPACITY = 128

@@ -4,8 +4,8 @@ WORKDIR /home/app
 
 COPY pyproject.toml .
 
-RUN pip install poetry && \
-poetry install
+RUN pip install poetry
+RUN poetry install --no-root
 
 COPY . .
 RUN chmod +x ./startup_commands.sh

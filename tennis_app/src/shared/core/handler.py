@@ -3,7 +3,9 @@ from tennis_app.src.shared.view import ErrorView
 
 
 class BaseHandler:
-    def send_response(self, start_response, headers, data, status=HttpStatus.OK):
+    def send_response(
+        self, start_response, headers, data, status=HttpStatus.OK
+    ) -> list[bytes]:
         start_response(status, headers + [("Content-Length", str(len(data)))])
         return [bytes(data, "utf-8")]
 

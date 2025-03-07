@@ -5,27 +5,29 @@ from tennis_app.src.models import PlayerModel
 from tennis_app.src.shared.exceptions import PlayerNotFoundError
 from tennis_app.src.shared.dto import ReadPlayerDTO
 
-from tennis_app.src.shared.core import BaseDAO
+from tennis_app.src.shared.core import PersistentDatabaseDAO
 
 
-class PlayerDAO(BaseDAO):
+class PlayerDAO(PersistentDatabaseDAO):
+    @staticmethod
     def insert_one(name: str) -> int:
-        with BaseDAO.new_session() as session:
+        with PersistentDatabaseDAO.new_session() as session:
             player = PlayerModel(name=name)
             stmt = select(PlayerModel.id).filter_by(name=name)
-            player.id = session.execute(stmt).scalar_one_or_none()
+            player.id = session.execute(stmt).scalar_one_or_none()  # type: ignore
             if player.id is None:
                 session.add(player)
             session.commit()
         return player.id
 
+    @staticmethod
     def select_one_by_name(name: str) -> ReadPlayerDTO:
         """
         :raises: PlayerNotFoundError
         """
-        with BaseDAO.new_session() as session:
+        with PersistentDatabaseDAO.new_session() as session:
             stmt = select(PlayerModel).filter_by(name=name)
-            player = session.execute(stmt).scalar()
+            player: PlayerModel | None = session.execute(stmt).scalar()
         if player is None:
             raise PlayerNotFoundError(f"Player {name} not found")
         else:

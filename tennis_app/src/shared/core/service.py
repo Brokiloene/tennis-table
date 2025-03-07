@@ -2,6 +2,7 @@ from abc import abstractmethod
 
 
 class BaseService:
+    @staticmethod
     @abstractmethod
-    def execute(self):
+    def execute(*args, **kwargs):
         pass

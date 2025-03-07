@@ -10,7 +10,7 @@ class MatchHistoryView(HtmlView):
     @staticmethod
     def get_matches_template_data(
         all_matches: List[ReadMatchDTO], cur_page: int, max_page: int
-    ):
+    ) -> dict[str, str | ViewMatchDTO | list[ViewMatchDTO]]:
 
         def get_match_view_dto(dto: ReadMatchDTO):
             score_data = dto.score.split(" ")
@@ -25,7 +25,7 @@ class MatchHistoryView(HtmlView):
                 p2_s3=score_data[5],
             )
 
-        d = {}
+        d: dict[str, str | ViewMatchDTO | list[ViewMatchDTO]] = {}
 
         cur_page_str = str(cur_page)
         max_page_str = str(max_page)
@@ -35,7 +35,6 @@ class MatchHistoryView(HtmlView):
         if max_page < 10:
             max_page_str = "0" + max_page_str
 
-        # d['cur_page'] = cur_page
         d["cur_page_d1"] = cur_page_str[0]
         d["cur_page_d2"] = cur_page_str[1]
 
@@ -56,7 +55,7 @@ class MatchHistoryView(HtmlView):
 
         matches = [get_match_view_dto(dto) for dto in all_matches]
         d["matches"] = matches
-        d["next_page_num"] = min(cur_page + 1, max_page)
-        d["prev_page_num"] = max(cur_page - 1, 1)
+        d["next_page_num"] = str(min(cur_page + 1, max_page))
+        d["prev_page_num"] = str(max(cur_page - 1, 1))
 
         return d

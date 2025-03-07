@@ -12,26 +12,40 @@ class GameScore(IntEnum):
 
 class Match:
     def __init__(self, p1_name: str, p2_name: str) -> None:
-        self.p1_name = p1_name
-        self.p2_name = p2_name
-        self.sets = [[0, 0], [0, 0], [0, 0]]
-        self.cur_set = 0
+        self.p1_name: str = p1_name
+        self.p2_name: str = p2_name
+        self.sets: list[list[int]] = [[0, 0], [0, 0], [0, 0]]
+        self.cur_set: int = 0
         self.p1_game_score: GameScore | int = GameScore.LOVE
         self.p2_game_score: GameScore | int = GameScore.LOVE
-        self.p1_sets_won = 0
-        self.p2_sets_won = 0
+        self.p1_sets_won: int = 0
+        self.p2_sets_won: int = 0
+        self.points_added = 0
 
-        self.is_tiebreak = False
-        self.match_ended = False
+        self.is_tiebreak: bool = False
+        self.match_ended: bool = False
         self.winner: str | None = None
 
+    def get_player_idx(self, player_name: str):
+        """
+        :raises: ValueError
+        """
+        if player_name == self.p1_name:
+            return 1
+        elif player_name == self.p2_name:
+            return 2
+        else:
+            raise ValueError(f"Player with name {player_name} not found")
+
     def add_game_point(self, player_num: int) -> None:
+        self.points_added += 1
+
         # there are player 1 and player 2
         if self.match_ended:
             return
-        cur_score = getattr(self, f"p{player_num}_game_score")
+        cur_score: int = getattr(self, f"p{player_num}_game_score")
         if self.is_tiebreak:
-            new_score = cur_score + 1
+            new_score: int = cur_score + 1
         else:
             new_score = GameScore(cur_score + 1)
         setattr(self, f"p{player_num}_game_score", new_score)
@@ -50,6 +64,9 @@ class Match:
             self.p2_game_score = GameScore.LOVE
 
         if self.is_set_end():
+            if self.is_tiebreak:
+                self.is_tiebreak = False
+
             self.cur_set += 1
             cur_sets_won = getattr(self, f"p{player_num}_sets_won")
             setattr(self, f"p{player_num}_sets_won", cur_sets_won + 1)
@@ -86,13 +103,12 @@ class Match:
         p2_games_won = self.sets[self.cur_set][1]
 
         if (
-            any([p == 6 for p in (p1_games_won, p2_games_won)])
+            any([p >= 6 for p in (p1_games_won, p2_games_won)])
             and abs(p1_games_won - p2_games_won) >= 2
         ):
             return True
 
-        if any([p == 7 for p in (p1_games_won, p2_games_won)]):
-            self.is_tiebreak = False
+        if self.is_tiebreak and any([p == 7 for p in (p1_games_won, p2_games_won)]):
             return True
 
         if p1_games_won == 6 and p2_games_won == 6:
@@ -102,6 +118,7 @@ class Match:
 
     def is_match_end(self) -> bool:
         if self.p1_sets_won >= 2 or self.p2_sets_won >= 2:
+            self.match_ended = True
             return True
         else:
             return False

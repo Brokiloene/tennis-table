@@ -4,5 +4,5 @@ from .view import MainPageView
 
 class IndexController(BaseController):
     def do_GET(self, environ, start_response):
-        data = MainPageView.render({})
+        data: str = MainPageView.render({})
         return self.send_response(start_response, self.headers, data)
