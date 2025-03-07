@@ -25,7 +25,7 @@ class Dispatcher(BaseMiddleware):
         controller: BaseController | None = self.routes.get(url, None)
         if controller is None:
             return self.send_error(
-                start_response, HttpStatus.NOT_FOUND, BaseController.headers
+                start_response, HttpStatus.NOT_FOUND, BaseController().headers
             )
         else:
             return controller(environ, start_response)
