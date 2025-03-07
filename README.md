@@ -8,7 +8,7 @@
 ## Стек
 |||
 |-|-|
-|Backend|Waitress + Pure WSGI, SQLAlchemy + MySQL, Alembic, Jinja2|
+|Backend|Waitress + Pure WSGI, SQLAlchemy + MySQL, Alembic, Jinja2, Poetry|
 |Frontend|HTML, CSS, JS|
 
 ## Запуск
