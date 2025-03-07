@@ -5,7 +5,10 @@ from uuid import UUID
 import pytest
 
 from tennis_app.src.shared.tennis_game_logic import Match
-from tennis_app.src.shared.dao.match_memory_storage import MemoryStorageDAO, MatchNotFoundError
+from tennis_app.src.shared.dao.match_memory_storage import (
+    MemoryStorageDAO,
+    MatchNotFoundError,
+)
 
 
 @pytest.fixture
@@ -24,13 +27,9 @@ def test_no_race_on_match_change_score(tennis_match_uuid: UUID):
             int(1)
             # "P1" has id 1, "P2" has id 2
             MemoryStorageDAO.update(match_uuid, 1)
-    
-    t1 = threading.Thread(
-        target=change_score_not_atomic, args=(tennis_match_uuid,)
-    )
-    t2 = threading.Thread(
-        target=change_score_not_atomic, args=(tennis_match_uuid,)
-    )
+
+    t1 = threading.Thread(target=change_score_not_atomic, args=(tennis_match_uuid,))
+    t2 = threading.Thread(target=change_score_not_atomic, args=(tennis_match_uuid,))
     t1.start()
     t2.start()
     t1.join()
@@ -39,7 +38,7 @@ def test_no_race_on_match_change_score(tennis_match_uuid: UUID):
     tennis_match: Match = MemoryStorageDAO.read(tennis_match_uuid)
     assert tennis_match.match_ended is True
     assert tennis_match.winner == "P1"
-    assert tennis_match.points_added == NUMBER_OF_ADDITIONS*2
+    assert tennis_match.points_added == NUMBER_OF_ADDITIONS * 2
 
 
 def test_crud(tennis_match_uuid: UUID):
@@ -61,7 +60,7 @@ def test_crud(tennis_match_uuid: UUID):
     # delete
     with pytest.raises(MatchNotFoundError):
         MemoryStorageDAO.delete(fake_uuid)
-    
+
     MemoryStorageDAO.delete(tennis_match_uuid)
     with pytest.raises(MatchNotFoundError):
         MemoryStorageDAO.read(tennis_match_uuid)

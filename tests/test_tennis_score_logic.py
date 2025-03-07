@@ -7,15 +7,18 @@ def player_won_points(tennis_match: Match, player_name: str, pts_won: int):
     for _ in range(pts_won):
         tennis_match.add_game_point(tennis_match.get_player_idx(player_name))
 
+
 def player_won_games(tennis_match: Match, player_name: str, games_won: int):
     for _ in range(games_won):
         # To win a game one need 4 points
         player_won_points(tennis_match, player_name=player_name, pts_won=4)
 
+
 def player_won_sets(tennis_match: Match, player_name: str, sets_won: int):
     for _ in range(sets_won):
-        # To win a set one need to win 6 games 
+        # To win a set one need to win 6 games
         player_won_games(tennis_match, player_name=player_name, games_won=6)
+
 
 @pytest.fixture
 def tennis_match():
@@ -23,22 +26,23 @@ def tennis_match():
 
 
 @pytest.mark.parametrize(
-        "player_to_win, sets_p1_won, sets_p2_won", 
-        [
-            ("P1", 2, 0), 
-            ("P1", 2, 1),
-            ("P2", 0, 2),
-            ("P2", 1, 2),
-        ]
+    "player_to_win, sets_p1_won, sets_p2_won",
+    [
+        ("P1", 2, 0),
+        ("P1", 2, 1),
+        ("P2", 0, 2),
+        ("P2", 1, 2),
+    ],
 )
 def test_player_win(
-    tennis_match: Match, 
-    player_to_win: str, 
-    sets_p1_won: int, 
-    sets_p2_won: int
+    tennis_match: Match, player_to_win: str, sets_p1_won: int, sets_p2_won: int
 ):
-    player_won_sets(tennis_match, player_name=tennis_match.p1_name, sets_won=sets_p1_won)
-    player_won_sets(tennis_match, player_name=tennis_match.p2_name, sets_won=sets_p2_won)
+    player_won_sets(
+        tennis_match, player_name=tennis_match.p1_name, sets_won=sets_p1_won
+    )
+    player_won_sets(
+        tennis_match, player_name=tennis_match.p2_name, sets_won=sets_p2_won
+    )
 
     assert tennis_match.is_match_end() == True
     assert tennis_match.match_ended == True
@@ -46,22 +50,23 @@ def test_player_win(
 
 
 @pytest.mark.parametrize(
-        "player_to_win, sets_p1_won, sets_p2_won", 
-        [
-            ("P1", 2, 0), 
-            ("P1", 2, 1),
-            ("P2", 0, 2),
-            ("P2", 1, 2),
-        ]
+    "player_to_win, sets_p1_won, sets_p2_won",
+    [
+        ("P1", 2, 0),
+        ("P1", 2, 1),
+        ("P2", 0, 2),
+        ("P2", 1, 2),
+    ],
 )
 def test_adding_pts_after_match_end_change_nothing(
-    tennis_match: Match, 
-    player_to_win: str, 
-    sets_p1_won: int, 
-    sets_p2_won: int
+    tennis_match: Match, player_to_win: str, sets_p1_won: int, sets_p2_won: int
 ):
-    player_won_sets(tennis_match, player_name=tennis_match.p1_name, sets_won=sets_p1_won)
-    player_won_sets(tennis_match, player_name=tennis_match.p2_name, sets_won=sets_p2_won)
+    player_won_sets(
+        tennis_match, player_name=tennis_match.p1_name, sets_won=sets_p1_won
+    )
+    player_won_sets(
+        tennis_match, player_name=tennis_match.p2_name, sets_won=sets_p2_won
+    )
 
     set_score = tennis_match.sets
 

@@ -42,7 +42,13 @@ def test_crud(memory_storage: MemoryStorage):
         memory_storage.get_value(key1)
 
 
-@pytest.mark.parametrize("memory_storage", [3,], indirect=True)
+@pytest.mark.parametrize(
+    "memory_storage",
+    [
+        3,
+    ],
+    indirect=True,
+)
 def test_lfu_cache_logic(memory_storage: MemoryStorage):
     key1 = uuid.uuid4()
     key2 = uuid.uuid4()
@@ -51,7 +57,6 @@ def test_lfu_cache_logic(memory_storage: MemoryStorage):
     memory_storage.put(key1, "value1")
     memory_storage.put(key2, "value2")
     memory_storage.put(key3, "value3")
-
 
     for _ in range(1):
         memory_storage.get_value(key1)
@@ -73,6 +78,7 @@ def test_lfu_cache_logic(memory_storage: MemoryStorage):
 @pytest.mark.slow
 def test_race_condition(memory_storage: MemoryStorage):
     NUMBER_OF_UPDATES = 100000
+
     def change_value_not_atomic(key):
         for _ in range(NUMBER_OF_UPDATES):
             # a non atomic operation
@@ -81,12 +87,8 @@ def test_race_condition(memory_storage: MemoryStorage):
 
     key = uuid.uuid4()
     memory_storage.put(key, "value")
-    t1 = threading.Thread(
-        target=change_value_not_atomic, args=(key,)
-    )
-    t2 = threading.Thread(
-        target=change_value_not_atomic, args=(key,)
-    )
+    t1 = threading.Thread(target=change_value_not_atomic, args=(key,))
+    t2 = threading.Thread(target=change_value_not_atomic, args=(key,))
     t1.start()
     t2.start()
     t1.join()
@@ -94,4 +96,4 @@ def test_race_condition(memory_storage: MemoryStorage):
 
     assert memory_storage.get_value(key) == "a new value"
     # +1 because initial value of frequency is 1
-    assert memory_storage._freqs[key].frequency == NUMBER_OF_UPDATES*2+1
+    assert memory_storage._freqs[key].frequency == NUMBER_OF_UPDATES * 2 + 1

@@ -39,7 +39,7 @@ class Match:
 
     def add_game_point(self, player_num: int) -> None:
         self.points_added += 1
-        
+
         # there are player 1 and player 2
         if self.match_ended:
             return
@@ -74,7 +74,6 @@ class Match:
                 self.match_ended = True
                 self.set_winner()
 
-
     def is_game_end(self) -> bool:
         scores = (self.p1_game_score, self.p2_game_score)
 
@@ -108,11 +107,8 @@ class Match:
             and abs(p1_games_won - p2_games_won) >= 2
         ):
             return True
-        
-        if (
-            self.is_tiebreak and 
-            any([p == 7 for p in (p1_games_won, p2_games_won)])
-        ):
+
+        if self.is_tiebreak and any([p == 7 for p in (p1_games_won, p2_games_won)]):
             return True
 
         if p1_games_won == 6 and p2_games_won == 6:

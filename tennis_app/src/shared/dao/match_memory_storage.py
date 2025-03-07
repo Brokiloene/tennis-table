@@ -6,6 +6,7 @@ from tennis_app.src.shared.exceptions import MatchNotFoundError
 from tennis_app.src.infrastructure.memory_storage import MemoryStorage
 from tennis_app.src.shared.tennis_game_logic import Match
 
+
 class MemoryStorageDAO:
     _storage = MemoryStorage()
     _lock = threading.Lock()
