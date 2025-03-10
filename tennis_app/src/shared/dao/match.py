@@ -19,6 +19,8 @@ class MatchDAO(PersistentDatabaseDAO):
 
     @staticmethod
     def _get_offset(page: int, matches_on_page_cnt: int) -> int:
+        # this offset needs for matches history pagination
+        # in order to not read superfluous data
         if page == 1:
             return 0
         else:
@@ -26,6 +28,11 @@ class MatchDAO(PersistentDatabaseDAO):
 
     @staticmethod
     def get_cnt_of_matches(search_name: str | None = None) -> int:
+        """
+        Returns number of matches with players whose names match with `search_name`
+
+        Returns count of all matches if `search_name` is `None`
+        """
         with PersistentDatabaseDAO.new_session() as session:
             if search_name is None:
                 res = session.execute(
@@ -48,7 +55,10 @@ class MatchDAO(PersistentDatabaseDAO):
 
     @staticmethod
     def fetch_all(page: int, matches_on_page_cnt: int) -> list[ReadMatchDTO]:
-        # matches_data = []
+        """
+        Select tennis matches data for given `page` in the amount equal
+        to `matches_on_page_cnt` without filtering by player name
+        """
         with PersistentDatabaseDAO.new_session() as session:
             stmt = text(
                 """
@@ -74,7 +84,11 @@ class MatchDAO(PersistentDatabaseDAO):
     def fetch_filtered(
         search_query: str, page: int, matches_on_page_cnt: int
     ) -> list[ReadMatchDTO]:
-        # matches_data = []
+        """
+        Select tennis matches data for given `page` in the amount equal
+        to `matches_on_page_cnt` with filtering by player name
+        """
+
         with PersistentDatabaseDAO.new_session() as session:
             stmt = text(
                 """

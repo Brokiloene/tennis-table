@@ -26,7 +26,7 @@ exclude = "(tennis_app/Local)"
 [tool.pytest.ini_options]
 pythonpath = ["tennis_app/src"]
 testpaths = ["tests"]
-markers = ["slow"]
+markers = ["slow", "db", "test_only_this"]
 
 [build-system]
 requires = ["poetry-core"]

@@ -20,9 +20,13 @@ def test_crud(memory_storage: MemoryStorage):
     key2 = uuid.uuid4()
     memory_storage.put(key2, "value2")
 
+    fake_key = uuid.uuid4()
+
     # read
     assert memory_storage.get_value(key1) == "value1"
     assert memory_storage.get_value(key2) == "value2"
+    with pytest.raises(KeyError):
+        memory_storage.get_value(fake_key)
 
     # update
     memory_storage.update_value(key1, "value1.1")
@@ -30,6 +34,9 @@ def test_crud(memory_storage: MemoryStorage):
 
     assert memory_storage.get_value(key1) == "value1.1"
     assert memory_storage.get_value(key2) == "value2.1"
+
+    with pytest.raises(KeyError):
+        memory_storage.update_value(fake_key, "")
 
     # delete
     memory_storage.delete(key1)
@@ -40,6 +47,9 @@ def test_crud(memory_storage: MemoryStorage):
 
     with pytest.raises(KeyError):
         memory_storage.get_value(key1)
+
+    with pytest.raises(KeyError):
+        memory_storage.delete(fake_key)
 
 
 @pytest.mark.parametrize(
