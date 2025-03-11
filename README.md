@@ -1,4 +1,5 @@
 ## Tennis Table
+[![Coverage Status](https://coveralls.io/repos/github/Brokiloene/tennis-table/badge.svg?branch=develop)](https://coveralls.io/github/Brokiloene/tennis-table?branch=develop)
 ![](./docs/match.png)
 ### Тайбрейк
 ![](./docs/tiebreak.png)
