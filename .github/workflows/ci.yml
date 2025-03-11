@@ -30,6 +30,8 @@ jobs:
 
       - name: Create .env file from Secrets
         run: echo -e "${{ secrets.ENV_FILE }}" > .env
+      - name: Export .env variables
+        run: export $(grep -v '^#' .env | xargs) >> $GITHUB_ENV
       - name: Debug environment variables
         run: env
       - name: Check dir
