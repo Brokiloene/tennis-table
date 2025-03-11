@@ -30,8 +30,11 @@ jobs:
 
       - name: Create .env file from Secrets
         run: echo -e "${{ secrets.ENV_FILE }}" > .env
-      - name: Export .env variables
-        run: export $(grep -v '^#' .env | xargs) >> $GITHUB_ENV
+      - name: Load environment variables from .env
+        uses: falti/dotenv-action@v1
+        with:
+          path: .env
+
       - name: Debug environment variables
         run: env
       - name: Check dir
