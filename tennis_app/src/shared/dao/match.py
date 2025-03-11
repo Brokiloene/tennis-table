@@ -86,7 +86,7 @@ class MatchDAO(PersistentDatabaseDAO):
     ) -> list[ReadMatchDTO]:
         """
         Select tennis matches data for given `page` in the amount equal
-        to `matches_on_page_cnt` with filtering by player name
+        to `matches_on_page_cnt` with player name matching `search_query`
         """
 
         with PersistentDatabaseDAO.new_session() as session:
