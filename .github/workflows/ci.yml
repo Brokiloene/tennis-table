@@ -35,9 +35,13 @@ jobs:
         with:
           path: .env
 
-      - name: Debug environment variables
-        run: env
-      - name: Check dir
-        run: ls -a
       - name: Run tests with pytest
-        run: PYTHONPATH=$(pwd) poetry run pytest
+        run: PYTHONPATH=$(pwd) poetry run pytest --cov=tennis_app/src --cov-report=xml
+      
+
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          path-to-lcov: ./coverage.xml
+      
