@@ -41,26 +41,35 @@ def test_no_race_on_match_change_score(tennis_match_uuid: UUID):
     assert tennis_match.points_added == NUMBER_OF_ADDITIONS * 2
 
 
-def test_crud(tennis_match_uuid: UUID):
-    # read
+def test_read_success(tennis_match_uuid: UUID):
     _: Match = MemoryStorageDAO.read(tennis_match_uuid)
 
+
+def test_read_error_not_found():
     fake_uuid = uuid.uuid1()
     with pytest.raises(MatchNotFoundError):
         MemoryStorageDAO.read(fake_uuid)
 
-    # update
+
+def test_update_success(tennis_match_uuid: UUID):
     MemoryStorageDAO.update(tennis_match_uuid, 1)
     m = MemoryStorageDAO.read(tennis_match_uuid)
     assert m.points_added == 1
 
+
+def test_update_error_not_found():
+    fake_uuid = uuid.uuid1()
     with pytest.raises(MatchNotFoundError):
         MemoryStorageDAO.update(fake_uuid, 1)
 
-    # delete
-    with pytest.raises(MatchNotFoundError):
-        MemoryStorageDAO.delete(fake_uuid)
 
+def test_delete_success(tennis_match_uuid: UUID):
     MemoryStorageDAO.delete(tennis_match_uuid)
     with pytest.raises(MatchNotFoundError):
         MemoryStorageDAO.read(tennis_match_uuid)
+
+
+def test_delete_error_not_found():
+    fake_uuid = uuid.uuid1()
+    with pytest.raises(MatchNotFoundError):
+        MemoryStorageDAO.delete(fake_uuid)

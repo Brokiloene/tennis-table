@@ -22,7 +22,7 @@ def test_insert():
 
 @pytest.mark.slow
 @pytest.mark.db
-def test_select():
+def test_select_success():
     res: ReadPlayerDTO = PlayerDAO.select_one_by_name("a player")
     assert res.name == "a player"
 
@@ -30,11 +30,15 @@ def test_select():
     assert res.name == "Bjorn Borg"
     assert res.p_id == 1
 
-    with pytest.raises(PlayerNotFoundError):
-        PlayerDAO.select_one_by_name("fake player")
-
     # test trying to add the same player second time doesn't change db data
     # and thus doesn't change the id
     PlayerDAO.insert_one("Bjorn Borg")
     res: ReadPlayerDTO = PlayerDAO.select_one_by_name("Bjorn Borg")
     assert res.p_id == 1
+
+
+@pytest.mark.slow
+@pytest.mark.db
+def test_select_error_not_found():
+    with pytest.raises(PlayerNotFoundError):
+        PlayerDAO.select_one_by_name("fake player")

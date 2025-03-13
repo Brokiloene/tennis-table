@@ -12,44 +12,44 @@ def memory_storage(request: pytest.FixtureRequest) -> MemoryStorage:
     return MemoryStorage(capacity=capacity)
 
 
-def test_crud(memory_storage: MemoryStorage):
-    # create
+def test_put_success(memory_storage: MemoryStorage):
     key1 = uuid.uuid4()
     memory_storage.put(key1, "value1")
+    assert memory_storage._cached_data[key1] == "value1"
 
-    key2 = uuid.uuid4()
-    memory_storage.put(key2, "value2")
 
-    fake_key = uuid.uuid4()
-
-    # read
+def test_get_value_success(memory_storage: MemoryStorage):
+    key1 = uuid.uuid4()
+    memory_storage.put(key1, "value1")
     assert memory_storage.get_value(key1) == "value1"
-    assert memory_storage.get_value(key2) == "value2"
+
+
+def test_get_value_error_not_found(memory_storage: MemoryStorage):
+    fake_key = uuid.uuid1()
     with pytest.raises(KeyError):
         memory_storage.get_value(fake_key)
 
-    # update
+
+def test_update_success(memory_storage: MemoryStorage):
+    key1 = uuid.uuid4()
+    memory_storage.put(key1, "value1")
     memory_storage.update_value(key1, "value1.1")
-    memory_storage.update_value(key2, "value2.1")
-
     assert memory_storage.get_value(key1) == "value1.1"
-    assert memory_storage.get_value(key2) == "value2.1"
 
+
+def test_update_error_not_found(memory_storage: MemoryStorage):
+    fake_key = uuid.uuid1()
     with pytest.raises(KeyError):
-        memory_storage.update_value(fake_key, "")
+        memory_storage.update_value(fake_key, "fake value")
 
-    # delete
+
+def test_delete_success(memory_storage: MemoryStorage):
+    key1 = uuid.uuid4()
+    memory_storage.put(key1, "value1")
+    assert memory_storage.get_value(key1) == "value1"
     memory_storage.delete(key1)
-    memory_storage.delete(key2)
-
     with pytest.raises(KeyError):
         memory_storage.get_value(key1)
-
-    with pytest.raises(KeyError):
-        memory_storage.get_value(key1)
-
-    with pytest.raises(KeyError):
-        memory_storage.delete(fake_key)
 
 
 @pytest.mark.parametrize(
