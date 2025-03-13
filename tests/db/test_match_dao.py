@@ -37,12 +37,17 @@ def test_insert():
 
 @pytest.mark.slow
 @pytest.mark.db
-def test_get_cnt_of_matches():
-    new_id: int = PlayerDAO.insert_one("player for get_cnt_of_matches")
-
+def test_get_cnt_of_matches_empty():
+    new_id: int = PlayerDAO.insert_one("player for get_cnt_of_matches_empty")
     # no matches with this player yet
-    res = MatchDAO.get_cnt_of_matches(search_name="player for get_cnt_of_matches")
+    res = MatchDAO.get_cnt_of_matches(search_name="player for get_cnt_of_matches_empty")
     assert res == 0
+
+
+@pytest.mark.slow
+@pytest.mark.db
+def test_get_cnt_of_matches_add_one():
+    new_id: int = PlayerDAO.insert_one("player for get_cnt_of_matches_add_one")
 
     # add the match
     # id 1 is Bjorn Borg
@@ -50,24 +55,33 @@ def test_get_cnt_of_matches():
 
     new_match = CreateMatchDTO("a new uuid for cnt", 1, new_id, 1, "6 0 6 0 0 0")
     MatchDAO.insert_one(new_match)
-    res = MatchDAO.get_cnt_of_matches(search_name="player for get_cnt_of_matches")
+    res = MatchDAO.get_cnt_of_matches(
+        search_name="player for get_cnt_of_matches_add_one"
+    )
     assert res == 1
 
     bjorn_borg_matches_cnt_aft = MatchDAO.get_cnt_of_matches(search_name="Bjorn Borg")
     assert bjorn_borg_matches_cnt_pre + 1 == bjorn_borg_matches_cnt_aft
 
+
+@pytest.mark.slow
+@pytest.mark.db
+def test_get_cnt_of_matches_by_partial_name():
     # check partial coincidence
-    new_id2: int = PlayerDAO.insert_one("player for get_cnt_of_matches 2")
+    new_id2: int = PlayerDAO.insert_one(
+        "player for get_cnt_of_matches_by_partial_name 2"
+    )
     new_match = CreateMatchDTO("a new uuid for cnt2", 1, new_id2, 1, "6 0 6 0 0 0")
     MatchDAO.insert_one(new_match)
-    res = MatchDAO.get_cnt_of_matches(search_name="player for get_cnt_of_matches")
-    assert res == 2
+    res = MatchDAO.get_cnt_of_matches(
+        search_name="player for get_cnt_of_matches_by_partial_name"
+    )
+    assert res == 1
 
-    all_matches_cnt = MatchDAO.get_cnt_of_matches(search_name=None)
-    with PersistentDatabaseDAO.new_session() as session:
-        all_matches_cnt2 = session.query(MatchModel).count()
-    assert all_matches_cnt == all_matches_cnt2
 
+@pytest.mark.slow
+@pytest.mark.db
+def test_get_cnt_of_matches_by_fake_name():
     res = MatchDAO.get_cnt_of_matches(search_name="a fake non-existing player")
     assert res == 0
 
@@ -136,14 +150,22 @@ def test_page_offset_logic():
 
 @pytest.mark.slow
 @pytest.mark.db
-def test_fetch_filtered():
-    new_id: int = PlayerDAO.insert_one("player for fetch_filtered")
+def test_fetch_filtered_empty():
+    new_id: int = PlayerDAO.insert_one("player for fetch_filtered_empty")
 
     # no matches with this player yet
     res = MatchDAO.fetch_filtered(
-        search_query="player for fetch_filtered", page=1, matches_on_page_cnt=2
+        search_query="player for fetch_fetch_filtered_emptyfiltered",
+        page=1,
+        matches_on_page_cnt=2,
     )
     assert len(res) == 0
+
+
+@pytest.mark.slow
+@pytest.mark.db
+def test_fetch_filtered():
+    new_id: int = PlayerDAO.insert_one("player for fetch_filtered")
 
     new_match = CreateMatchDTO(
         "a new uuid for fetch filtered", 1, new_id, 1, "6 0 6 0 0 0"

@@ -8,12 +8,6 @@ from tennis_app.src.models import PlayerModel, MatchModel
 from tests.db.db_data import players, matches
 
 
-# def pytest_configure():
-#     test_engine = create_engine("sqlite:///:memory:", echo=True,)
-#     PersistentDatabaseDAO.new_session = sessionmaker(test_engine, expire_on_commit=False)
-#     BaseModel.metadata.create_all(test_engine)
-
-
 @pytest.fixture(scope="session", autouse=True)
 def create_test_db():
     test_engine = create_engine("sqlite:///:memory:", echo=False)
